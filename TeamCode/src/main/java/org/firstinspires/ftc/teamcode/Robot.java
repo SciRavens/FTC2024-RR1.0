@@ -46,15 +46,16 @@ public class Robot {
     public double claw_left_close_wide = 0.8;
 
     // Arm positions
-    public  double arm_pos_sample = 0.15;
-    public double arm_pos_folded = 0.8;
-    public double arm_pos_specimen = 0.3;
+    public  double arm_pos_sample = 0.375;
+    public double arm_pos_basket = 0.6;
+    public double arm_pos_specimen = 0.375;
+    public double arm_pos_chamber = 0.6;
 
     // Wrist positions
-    public double wrist_pos_sample  = 0.5;
-    public double wrist_pos_specimen = 0.6;
-    public double wrist_pos_basket = 0.45;
-    public double wrist_pos_drop  = 0.3;
+    public double wrist_pos_sample  = 0.575;
+    public double wrist_pos_specimen = 0.55;
+    public double wrist_pos_chamber = 0.75;
+    public double wrist_pos_basket = 0.6;
 
 
     // Slider positions

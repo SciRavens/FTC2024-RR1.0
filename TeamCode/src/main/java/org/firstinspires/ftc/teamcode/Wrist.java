@@ -19,14 +19,14 @@ public class Wrist {
         robot.servoWrist.setPosition(robot.wrist_pos_specimen);
     }
 
+    public void setPosChamber()
+    {
+        robot.servoWrist.setPosition(robot.wrist_pos_chamber);
+    }
+
     public void setPosBasket()
     {
         robot.servoWrist.setPosition(robot.wrist_pos_basket);
-    }
-
-    public void setPosDrop()
-    {
-        robot.servoWrist.setPosition(robot.wrist_pos_drop);
     }
 
     public void setPosAbsolute(double pos)
