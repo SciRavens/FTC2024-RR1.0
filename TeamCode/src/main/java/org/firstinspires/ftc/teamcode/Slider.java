@@ -30,6 +30,7 @@ public class Slider extends EncoderMotorOps {
         return robot.motorSlider.getCurrentPosition();
     }
 
+
     public void LowBasket() {autoOp(robot.slider_LowBasket_ticks);}
 //    Move slider height to Low basket
     public void LowChamber() {autoOp(robot.slider_LowChamber_ticks);}
@@ -54,6 +55,101 @@ public class Slider extends EncoderMotorOps {
         logUpdate();
     }
 
+    public class SliderFold implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                setPower(-0.5);
+                initialized = true;
+            }
+
+            double pos = getCurrentPosition();
+            packet.put("sliderPos", pos);
+            if (pos > 0) {
+                return true;
+            } else {
+                setPower(0);
+                return false;
+            }
+        }
+    }
+    public Action sliderFoldAction() {
+        return new SliderFold();
+    }
+
+    public class SliderLowChamber implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                setPower(0.5);
+                initialized = true;
+            }
+
+            double pos = getCurrentPosition();
+            packet.put("sliderPos", pos);
+            if (pos < robot.slider_LowChamber_ticks) {
+                return true;
+            } else {
+                setPower(0);
+                return false;
+            }
+        }
+    }
+    public Action sliderLowChamberAction() {
+        return new SliderLowChamber();
+    }
+
+    public class SliderHighChamber implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                setPower(0.5);
+                initialized = true;
+            }
+
+            double pos = getCurrentPosition();
+            packet.put("sliderPos", pos);
+            if (pos < robot.slider_HighChamber_ticks) {
+                return true;
+            } else {
+                setPower(0);
+                return false;
+            }
+        }
+    }
+    public Action sliderHighChamberAction() {
+        return new SliderHighChamber();
+    }
+
+    public class SliderHighBasket implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                setPower(0.5);
+                initialized = true;
+            }
+
+            double pos = getCurrentPosition();
+            packet.put("sliderPos", pos);
+            if (pos < robot.slider_HighBasket_ticks) {
+                return true;
+            } else {
+                setPower(0);
+                return false;
+            }
+        }
+    }
+    public Action sliderHighBasketAction() {
+        return new SliderLowBasket();
+    }
 
     public class SliderLowBasket implements Action {
         private boolean initialized = false;
@@ -78,4 +174,5 @@ public class Slider extends EncoderMotorOps {
     public Action sliderLowBasketAction() {
         return new SliderLowBasket();
     }
+
 }
