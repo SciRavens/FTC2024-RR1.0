@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import androidx.annotation.NonNull;
 
 public class Slider extends EncoderMotorOps {
     private Robot robot;
@@ -18,6 +21,13 @@ public class Slider extends EncoderMotorOps {
         super(robot, robot.motorSlider, pos_min, pos_max, auto_power, true);
         this.robot = robot;
         this.gamepad = gamepad;
+    }
+
+    public void setPower(double power) {
+        robot.motorSlider.setPower(power);
+    }
+    public int getCurrentPosition() {
+        return robot.motorSlider.getCurrentPosition();
     }
 
     public void LowBasket() {autoOp(robot.slider_LowBasket_ticks);}
@@ -42,5 +52,30 @@ public class Slider extends EncoderMotorOps {
     {
         manualOp(power * manual_speed_factor);
         logUpdate();
+    }
+
+
+    public class SliderLowBasket implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                setPower(0.5);
+                initialized = true;
+            }
+
+            double pos = getCurrentPosition();
+            packet.put("sliderPos", pos);
+            if (pos < robot.slider_LowBasket_ticks) {
+                return true;
+            } else {
+                setPower(0);
+                return false;
+            }
+        }
+    }
+    public Action sliderLowBasketAction() {
+        return new SliderLowBasket();
     }
 }

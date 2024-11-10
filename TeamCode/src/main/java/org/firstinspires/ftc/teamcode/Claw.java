@@ -1,6 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.Servo;
+import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import androidx.annotation.NonNull;
+
+
+
 
 public class Claw {
     Servo servoLeft;
@@ -48,5 +54,27 @@ public class Claw {
             servoRight.setPosition(right_close_wide);
             closed = true;
         }
+    }
+
+    public class CloseClawAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            close();
+            return false;
+        }
+    }
+    public Action closeClawAction() {
+        return new CloseClawAction();
+    }
+
+    public class OpenClawAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            open();
+            return false;
+        }
+    }
+    public Action openClawAction() {
+        return new OpenClawAction();
     }
 }
