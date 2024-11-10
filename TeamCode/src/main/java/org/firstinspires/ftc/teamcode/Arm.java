@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.hardware.Gamepad;
+import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import androidx.annotation.NonNull;
+
 
 
 
@@ -23,6 +26,53 @@ public class Arm {
     public void setPosAbsolute(double pos) {
         robot.servoArm.setPosition(pos);
     }
+
+
+    public class ArmChamberAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosChamber();
+            return false;
+        }
+    }
+    public Action setChamberAction() {
+        return new ArmChamberAction();
+    }
+
+
+    public class ArmSampleAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosSample();
+            return false;
+        }
+    }
+    public Action setSampleAction() {
+        return new ArmSampleAction();
+    }
+
+    public class ArmSpecimenAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosSpecimen();
+            return false;
+        }
+    }
+    public Action setSpecimenAction() {
+        return new ArmSpecimenAction();
+    }
+
+    public class ArmBasketAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosBasket();
+            return false;
+        }
+    }
+    public Action setBasketAction() {
+        return new ArmBasketAction();
+    }
+
 }
 
 
