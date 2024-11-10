@@ -83,8 +83,7 @@ public class Robot {
         led = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
         led.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
 
-        motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
+
         mDrive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
     }
 

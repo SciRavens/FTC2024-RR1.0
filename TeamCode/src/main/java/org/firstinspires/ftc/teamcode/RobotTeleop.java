@@ -32,10 +32,10 @@ private int cur = 1;
         leds.setPattern(cur);
         while(opModeIsActive()) {
             DT.drive();
-            slider_operate();
-            arm_wrist_operate();
-            claw_operate();
-            leds_operate();
+            //slider_operate();
+            //arm_wrist_operate();
+            //claw_operate();
+            //leds_operate();
         }
     }
 
