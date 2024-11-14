@@ -44,13 +44,13 @@ private int cur = 1;
         if (gamepad2.a) {
             arm.setPosSample();
             wrist.setPosSample();
-        } else if (gamepad2.b) {
+        } else if (gamepad2.y) {
             arm.setPosBasket();
             wrist.setPosBasket();
-        } else if(gamepad2.y) {
+        } else if(gamepad2.x) {
             arm.setPosChamber();
             wrist.setPosChamber();
-        } else if(gamepad2.x) {
+        } else if(gamepad2.b) {
             arm.setPosSpecimen();
             wrist.setPosSpecimen();
         }
@@ -61,12 +61,19 @@ private int cur = 1;
     public void slider_operate() {
         slider.autoOpCompletionCheck();
         if (gamepad2.dpad_down) {
-            // Go to the bottom
-            slider.fold();
+            // Go to Low Chamber
+            slider.LowChamber();
         } else if (gamepad2.dpad_up) {
-            // Goto the middle
+            // Go to High Basket
             slider.HighBasket();
-        } else if (gamepad2.left_stick_y != 0) {
+        } else if  (gamepad2.dpad_right) {
+            // Move to Low Basket
+            slider.LowBasket();
+        } else if (gamepad2.dpad_left) {
+            // Move to High Chamber
+            slider.HighChamber();
+        }
+        else if (gamepad2.left_stick_y != 0) {
             slider.manualOp(gamepad2.left_stick_y);
         } else {
             slider.manualDefaultStop();

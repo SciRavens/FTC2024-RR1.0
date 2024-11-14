@@ -28,7 +28,7 @@ public class AutonTestApp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // TBD: set the initial position
-        Pose2d initialPose = new Pose2d(11.8, 61.7, Math.toRadians(90));
+        Pose2d initialPose = new Pose2d(0, 72, Math.toRadians(90));
         robot = new Robot(hardwareMap, telemetry);
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot);
@@ -49,29 +49,47 @@ public class AutonTestApp extends LinearOpMode {
                 //.strafeTo(new Vector2d(44.5, 30))
                 //.turn(Math.toRadians(180))
                 //.lineToX(47.5)
+                //.waitSeconds(2)
+                .strafeTo(new Vector2d(0, 43.5));
                 //.waitSeconds(3);
-                .lineToY(48)
-                .waitSeconds(3);
 
-        Action trajectoryActionComeback = tab1.fresh()
-                .strafeTo(new Vector2d(48, 12))
+
+        Action wait = tab1.fresh()
+                .waitSeconds(0.5)
                 .build();
 
+        Action trajectoryActionStrafe = tab1.fresh()
+                .strafeTo(new Vector2d(60, 45))
+//                .waitSeconds(0.5)
+                .build();
+
+
+
         Actions.runBlocking(claw.closeClawAction());
-        Action trajAction = tab1.build();
         waitForStart();
 
         if (isStopRequested()) return;
 
         Actions.runBlocking(
                 new SequentialAction(
-                        trajAction,
-                        arm.setChamberAction(),
-                        wrist.setChamberAction(),
                         claw.closeClawAction(),
-                        trajectoryActionComeback
+                        arm.setChamberAction(),
+                        wrist.setSpecimenAction(),
+                        wait,
+                        slider.sliderHighChamberAction(),
+                        tab1.build(),
+                        wrist.setChamberActionAuton(),
+                        wait,
+//                        claw.openClawAction(),
+                        arm.setSampleAction(),
+                        wait,
+                        trajectoryActionStrafe,
+                        arm.setSpecimenAction(),
+                        wrist.setSpecimenAction(),
+                        claw.closeClawAction()
                 )
         );
+        telemetry.update();
     }
 }
 

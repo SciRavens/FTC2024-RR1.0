@@ -33,6 +33,11 @@ public class Wrist {
         robot.servoWrist.setPosition(robot.wrist_pos_basket);
     }
 
+    public void setPosChamberAuton()
+    {
+        robot.servoWrist.setPosition(robot.wrist_pos_chamber_auton);
+    }
+
     public void setPosAbsolute(double pos)
     {
         robot.servoWrist.setPosition(pos);
@@ -72,15 +77,31 @@ public class Wrist {
         return new WristSampleAction();
     }
 
-    public class WristBasketAction implements Action {
+    public class WristChamberActionAuton implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             setPosBasket();
             return false;
         }
     }
+    public Action setChamberActionAuton() {
+        return new WristChamberActionAuton();
+    }
+
+
+    public class WristBasketAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosSpecimen();
+            return false;
+        }
+    }
     public Action setBasketAction() {
         return new WristBasketAction();
     }
+
+
+
+
 
 }

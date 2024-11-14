@@ -64,13 +64,13 @@ private int cur = 1;
     }
     private void slider_operate() {
         if (gamepad2.dpad_up) {
-            slider_auto_pos(300);
+            slider_auto_pos(1670);
             inAutoOp = true;
         } else if (gamepad2.dpad_down) {
-            slider_auto_pos(0);
+            slider_auto_pos(504);
             inAutoOp = true;
         } else if (gamepad2.dpad_left) {
-            slider_auto_pos(600);
+            slider_auto_pos(1008);
             inAutoOp = true;
         } else if (gamepad2.dpad_right) {
             slider_auto_pos(1000);

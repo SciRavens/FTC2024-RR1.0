@@ -30,7 +30,8 @@ public class Slider extends EncoderMotorOps {
         return robot.motorSlider.getCurrentPosition();
     }
 
-
+//  Move slider to Intial Pose
+    public void InitialPose() {autoOp(robot.slider_Intial_Pose_ticks);}
     public void LowBasket() {autoOp(robot.slider_LowBasket_ticks);}
 //    Move slider height to Low basket
     public void LowChamber() {autoOp(robot.slider_LowChamber_ticks);}
@@ -61,7 +62,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(-0.5);
+                setPower(-1);
                 initialized = true;
             }
 
@@ -79,13 +80,37 @@ public class Slider extends EncoderMotorOps {
         return new SliderFold();
     }
 
+    public class SliderInitialPose implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                setPower(1);
+                initialized = true;
+            }
+
+            double pos = getCurrentPosition();
+            packet.put("sliderPos", pos);
+            if (pos < robot.slider_Intial_Pose_ticks) {
+                return true;
+            } else {
+                setPower(0);
+                return false;
+            }
+        }
+    }
+    public Action sliderInitialPoseAction() {
+        return new SliderInitialPose();
+    }
+
     public class SliderLowChamber implements Action {
         private boolean initialized = false;
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(0.5);
+                setPower(1);
                 initialized = true;
             }
 
@@ -109,7 +134,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(0.5);
+                setPower(1);
                 initialized = true;
             }
 
@@ -133,7 +158,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(0.5);
+                setPower(1);
                 initialized = true;
             }
 
@@ -157,7 +182,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(0.5);
+                setPower(1);
                 initialized = true;
             }
 
@@ -175,4 +200,27 @@ public class Slider extends EncoderMotorOps {
         return new SliderLowBasket();
     }
 
+    public class SliderChamberAutonAction implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                setPower(1);
+                initialized = true;
+            }
+
+            double pos = getCurrentPosition();
+            packet.put("sliderPos", pos);
+            if (pos < robot.slider_ChamberAuton_ticks) {
+                return true;
+            } else {
+                setPower(0);
+                return false;
+            }
+        }
+    }
+    public Action sliderChamberAutonAction() {
+        return new SliderChamberAutonAction();
+    }
 }
