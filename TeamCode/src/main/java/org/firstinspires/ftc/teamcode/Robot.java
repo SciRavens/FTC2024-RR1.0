@@ -46,18 +46,16 @@ public class Robot {
     public double claw_left_close_wide = 0.8;
 
     // Arm positions
-    public  double arm_pos_sample = 0.15;
-    public double arm_pos_basket = 0.4;
-    public double arm_pos_specimen = 0.125;
-    public double arm_pos_chamber = 0.2;
+    public  double arm_pos_sample = 0.85;
+    public double arm_pos_basket = 0.6;
+    public double arm_pos_specimen = 0.875;
+    public double arm_pos_chamber = 0.8;
 
     // Wrist positions
-    public double wrist_pos_sample  = 0.7;
-    public double wrist_pos_specimen = 0.4;
-    public double wrist_pos_chamber = 0.45;
-    public double wrist_pos_basket = 0.575;
-    public double wrist_pos_chamber_auton = 0.5;
-
+    public double wrist_pos_sample  = 0.3;
+    public double wrist_pos_specimen = 0.6;
+    public double wrist_pos_chamber = 0.8;
+    public double wrist_pos_basket = 0.425;
 
     // Slider positions
     public int slider_Intial_Pose_ticks = -1000;
@@ -69,6 +67,7 @@ public class Robot {
     public int slider_ChamberAuton_ticks = 950;
 
     public RevBlinkinLedDriver led;
+    public int wrist_pos_chamber_auton;
 
 
     public Robot(HardwareMap hardwareMap, Telemetry telemetry) {
