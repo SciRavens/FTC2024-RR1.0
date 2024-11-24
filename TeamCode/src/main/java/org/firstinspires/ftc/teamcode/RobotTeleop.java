@@ -44,12 +44,12 @@ private int cur = 1;
         if (gamepad2.a) {
             arm.setPosSample();
             wrist.setPosSample();
-        } else if (gamepad2.y) {
+        } else if (gamepad2.x) {
             arm.setPosBasket();
             wrist.setPosBasket();
-        } else if(gamepad2.x) {
+        } else if(gamepad2.y) {
             arm.setPosChamber();
-            wrist.setPosChamber();
+            wrist.setPosHighChamber();
         } else if(gamepad2.b) {
             arm.setPosSpecimen();
             wrist.setPosSpecimen();

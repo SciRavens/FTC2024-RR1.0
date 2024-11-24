@@ -50,28 +50,24 @@ public class AutonTestApp extends LinearOpMode {
                 //.turn(Math.toRadians(180))
                 //.lineToX(47.5)
                 //.waitSeconds(2)
-                .strafeTo(new Vector2d(0, 35));
+                .strafeTo(new Vector2d(0,0));
                 //.waitSeconds(3);
 
-        Action build = tab1.build();
 
         Action wait = tab1.fresh()
-                .waitSeconds(0.5)
+                .waitSeconds(2)
                 .build();
 
-        Action trajectoryActionStrafeBack = tab1.fresh()
-                .strafeTo(new Vector2d(0, 35))
-                .waitSeconds(0.5)
-                .build();
 
-        Action trajectoryActionPushSpecimen = tab1.fresh()
-                .strafeTo(new Vector2d(-36, 35))
-                .strafeTo(new Vector2d(-36, 9))
-                .strafeTo(new Vector2d(-52, 9))
-                .turn(180)
-                .strafeTo(new Vector2d(-52, 35))
-                .strafeTo(new Vector2d(-25,35))
-                .waitSeconds(0.5)
+        Action trajectoryActionPushSample = tab1.fresh()
+                .strafeTo(new Vector2d(0, 75))
+                .strafeTo(new Vector2d(36, 40))
+//                .strafeTo(new Vector2d(36, 9))
+//                .strafeTo(new Vector2d(52, 9))
+//                .turn(180)
+//                .strafeTo(new Vector2d(52, 35))
+//                .strafeTo(new Vector2d(25,35))
+//                .waitSeconds(0.5)
                 .build();
 
 
@@ -91,32 +87,23 @@ public class AutonTestApp extends LinearOpMode {
                 new SequentialAction(
                         claw.closeClawAction(),
                         arm.setChamberAction(),
-                        wrist.setSpecimenAction(),
+                        wrist.setHighChamberAction(),
                         wait,
-                        build,
-                        arm.setChamberAction(),
+                        tab1.build(),
                         wait,
                         claw.openClawAction(),
                         wait,
-                       trajectoryActionPushSpecimen,
-                        arm.setSpecimenAction(),
                         wrist.setSpecimenAction(),
-                        claw.closeClawAction(),
-                        trajectoryRotate180,
-                        claw.closeClawAction(),
-                        arm.setChamberAction(),
-                        wrist.setSpecimenAction(),
-                       wait,
-                        build,
-                        arm.setChamberAction(),
                         wait,
-                        claw.openClawAction()
-
-
-
-
-
-
+                        trajectoryActionPushSample
+//                        wrist.setSpecimenAction(),
+//                        claw.closeClawAction(),
+//                        arm.setChamberAction(),
+//                        wait,
+//                        build,
+//                        arm.setChamberAction(),
+//                        wait,
+//                        claw.openClawAction()
                 )
         );
         telemetry.update();
