@@ -4,8 +4,8 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "SciRavens-TeleOp")
-public class RobotTeleop extends LinearOpMode {
+@TeleOp(name = "SliderTestApp")
+public class SliderTestApp extends LinearOpMode {
     public Robot robot;
     public DriveTrain DT;
     public Slider slider;
@@ -35,9 +35,9 @@ private int cur = 1;
             DT.drive();
 //            slider_operate();
             slider_joystick();
-            arm_wrist_operate();
-            claw_operate();
-            leds_operate();
+            //arm_wrist_operate();
+//            claw_operate();
+//            leds_operate();
         }
     }
 
@@ -46,57 +46,41 @@ private int cur = 1;
         if (gamepad2.a) {
             arm.setPosSample();
             wrist.setPosSample();
-        } else if (gamepad2.y) {
+        } else if (gamepad2.x) {
             arm.setPosBasket();
             wrist.setPosBasket();
-        } else if(gamepad2.x) {
-            arm.setPosStarting();
-            wrist.setPosStarting();
+        } else if(gamepad2.y) {
+            arm.setPosChamber();
+            wrist.setPosHighChamber();
         } else if(gamepad2.b) {
             arm.setPosSpecimen();
-            sleep(750);
             wrist.setPosSpecimen();
         }
     }
 
 
-
-    public void slider_operate() {
-        slider.autoOpCompletionCheck();
-        if (gamepad2.dpad_down) {
-            // Go to Low Chamber
-            slider.LowChamber();
-        } else if (gamepad2.dpad_up) {
-            // Go to High Basket
-            slider.HighBasket();
-        } else if  (gamepad2.dpad_right) {
-            // Move to Low Basket
-            slider.LowBasket();
-        } else if (gamepad2.dpad_left) {
-            // Move to High Chamber
-            slider.HighChamber();
-        }
-    }
-
     public void slider_joystick() {
         if (gamepad2.left_stick_y != 0) {
-            slider.manualOp(gamepad2.left_stick_y);
+            robot.motorSlider.setPower(-gamepad2.left_stick_y);
         } else {
-            slider.manualDefaultStop();
+            robot.motorSlider.setPower(0);
         }
+        double pos = robot.motorSlider.getCurrentPosition();
+        robot.telemetry.addData("Slider Current Position:", pos);
+        robot.telemetry.update();
     }
-    //    private void slider_pos() {
-//        if (gamepad2.dpad_up) {
-//            slider.LowBasket();
-//        } else if (gamepad2.dpad_down) {
-//            slider.LowChamber();
-//        } else if (gamepad2.dpad_left) {
-//            slider.HighBasket();
-//        } else if (gamepad2.dpad_right) {
-//            slider.HighChamber();
-//        }
-//
-//    }
+        private void slider_pos() {
+        if (gamepad2.dpad_up) {
+            slider.LowBasket();
+        } else if (gamepad2.dpad_down) {
+            slider.LowChamber();
+        } else if (gamepad2.dpad_left) {
+            slider.HighBasket();
+        } else if (gamepad2.dpad_right) {
+            slider.HighChamber();
+        }
+
+    }
 
     private void claw_operate() {
         if (gamepad2.left_trigger > 0.9) {
@@ -105,14 +89,6 @@ private int cur = 1;
             claw.open();
         } else {
             claw.close();
-        }
-    }
-    private void leds_operate() {
-        if (gamepad2.right_bumper || gamepad1.right_bumper) {
-            cur = (cur + 1) % leds.patterns.length;
-            leds.setPattern(cur);
-            telemetry.addData("SETTING COLOR", leds.patterns[cur].toString());
-            telemetry.update();
         }
     }
 }

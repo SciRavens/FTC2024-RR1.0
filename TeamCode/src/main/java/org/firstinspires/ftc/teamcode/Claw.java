@@ -56,6 +56,15 @@ public class Claw {
         }
     }
 
+
+    public void setPosAbsoluteRight(double pos) {
+        servoRight.setPosition(pos);
+    }
+
+    public void setPosAbsoluteLeft(double pos) {
+        servoLeft.setPosition(pos);
+    }
+
     public class CloseClawAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {

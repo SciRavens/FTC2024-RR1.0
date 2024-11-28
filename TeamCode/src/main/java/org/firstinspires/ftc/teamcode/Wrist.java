@@ -13,6 +13,7 @@ public class Wrist {
         this.robot = robot;
     }
 
+    public void setPosStarting(){robot.servoWrist.setPosition(robot.wrist_pos_starting);}
     public void setPosSample()
     {
         robot.servoWrist.setPosition(robot.wrist_pos_sample);
@@ -24,7 +25,6 @@ public class Wrist {
     }
 
     public void setPosHighChamber() {robot.servoWrist.setPosition(robot.wrist_pos_high_chamber);}
-
     public void setPosLowChamber() {robot.servoWrist.setPosition(robot.wrist_pos_low_chamber);}
 
     public void setPosBasket()

@@ -125,7 +125,7 @@ public class Slider extends EncoderMotorOps {
         }
     }
     public Action sliderLowChamberAction() {
-        return new SliderLowChamber();
+        return new SliderHighChamber();
     }
 
     public class SliderHighChamber implements Action {
@@ -173,7 +173,7 @@ public class Slider extends EncoderMotorOps {
         }
     }
     public Action sliderHighBasketAction() {
-        return new SliderLowBasket();
+        return new SliderHighBasket();
     }
 
     public class SliderLowBasket implements Action {

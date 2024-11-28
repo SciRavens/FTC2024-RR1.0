@@ -12,7 +12,7 @@ public class Arm {
     public Arm(Robot robot) {
         this.robot = robot;
     }
-
+    public void setPosStarting(){robot.servoArm.setPosition(robot.arm_pos_starting);}
     public void setPosSample() {
         robot.servoArm.setPosition(robot.arm_pos_sample);
     }

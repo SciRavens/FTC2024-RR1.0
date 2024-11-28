@@ -9,10 +9,10 @@ public class ArmWristTuningApp extends LinearOpMode {
     public Robot robot;
     public Arm arm;
     public Wrist wrist;
-    public double arm_start_pos = 0.0;
+    public double arm_start_pos = 0.5;
     public double arm_cur_pos = arm_start_pos;
     public double arm_inc = 0.05;
-    public double wrist_start_pos = 0.0;
+    public double wrist_start_pos = 0.5;
     public double wrist_cur_pos = wrist_start_pos;
     public double wrist_inc = 0.05;
     public boolean buttonPressed = false;

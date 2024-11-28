@@ -46,26 +46,28 @@ public class Robot {
     public double claw_left_close_wide = 0.8;
 
     // Arm positions
-    public  double arm_pos_sample = 0.25;
-    public double arm_pos_basket = 0.45;
-    public double arm_pos_specimen = 0.25;
-    public double arm_pos_chamber = 0.35;
+    public double arm_pos_starting = 0.8;
+    public  double arm_pos_sample = 0.15;
+    public double arm_pos_basket = 0.4;
+    public double arm_pos_specimen = 0.15;
+    public double arm_pos_chamber = 0.4;
 
     // Wrist positions
-    public double wrist_pos_sample  = 0.3;
+    public double wrist_pos_starting = 0.9;
+    public double wrist_pos_sample  = 0.6;
     public double wrist_pos_specimen = 0.4;
-    public double wrist_pos_high_chamber = 0.35;
-    public double wrist_pos_low_chamber = 0.4;
-    public double wrist_pos_basket = 0.55;
+    public double wrist_pos_high_chamber = 0.65;
+    public double wrist_pos_low_chamber = 0.65;
+    public double wrist_pos_basket = 0.65;
 
     // Slider positions
-    public int slider_Intial_Pose_ticks = -1000;
+    public int slider_Intial_Pose_ticks = -60;
     public int slider_LowBasket_ticks = 1000;
-    public int slider_HighBasket_ticks = 1670;
-    public int slider_LowChamber_ticks = 504;
-    public int slider_HighChamber_ticks = 1300;
+    public int slider_HighBasket_ticks = 2700; // finished needs testing
+    public int slider_LowChamber_ticks = 1004;
+    public int slider_HighChamber_ticks = 1725; // finished needs testing
 
-    public int slider_ChamberAuton_ticks = 950;
+    public int slider_ChamberAuton_ticks = 10;
 
     public RevBlinkinLedDriver led;
     public int wrist_pos_chamber_auton;
