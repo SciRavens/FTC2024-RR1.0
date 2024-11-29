@@ -8,9 +8,13 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class Wrist {
     private Robot robot;
+    public double target;
+    private double speed = 0.001;
 
     public Wrist(Robot robot) {
+
         this.robot = robot;
+        this.target = robot.servoWrist.getPosition();
     }
 
     public void setPosStarting(){robot.servoWrist.setPosition(robot.wrist_pos_starting);}
@@ -18,12 +22,14 @@ public class Wrist {
     {
         robot.servoWrist.setPosition(robot.wrist_pos_sample);
     }
-
+    public void setPosSampleTwo()
+    {
+        robot.servoWrist.setPosition(robot.wrist_pos_sample_two);
+    }
     public void setPosSpecimen()
     {
         robot.servoWrist.setPosition(robot.wrist_pos_specimen);
     }
-
     public void setPosHighChamber() {robot.servoWrist.setPosition(robot.wrist_pos_high_chamber);}
     public void setPosLowChamber() {robot.servoWrist.setPosition(robot.wrist_pos_low_chamber);}
 
@@ -42,6 +48,16 @@ public class Wrist {
         robot.servoWrist.setPosition(pos);
     }
 
+    public void operate() {
+        double curr_pos = robot.servoWrist.getPosition();
+        if (Math.abs(target - curr_pos) > speed) {
+            double next_pos = curr_pos + speed * ((target > curr_pos) ? 1 : -1);
+            robot.servoWrist.setPosition(next_pos);
+        }
+        robot.telemetry.addData("Wrist Curr Pos:", curr_pos);
+        robot.telemetry.addData("Wrist Target:", this.target);
+        robot.telemetry.update();
+    }
 
     public class WristHighChamberAction implements Action {
         @Override

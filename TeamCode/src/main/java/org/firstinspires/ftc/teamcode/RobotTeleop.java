@@ -44,8 +44,12 @@ private int cur = 1;
     private void arm_wrist_operate()
     {
         if (gamepad2.a) {
-            arm.setPosSample();
+            arm.setPosSampleTwo();
+            sleep(800);
+            claw.open();
             wrist.setPosSample();
+            sleep(800);
+            arm.setPosSample();
         } else if (gamepad2.y) {
             arm.setPosBasket();
             wrist.setPosBasket();
