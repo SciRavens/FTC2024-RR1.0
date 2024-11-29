@@ -39,9 +39,9 @@ public class Robot {
 
     // Claw positions
     public double claw_left_open = 0.8;
-    public double claw_right_open = 0.2;
-    public double claw_left_close = 0.15;
-    public double claw_right_close = 0.85;
+    public double claw_right_open = 0.35;
+    public double claw_left_close = 0.45;
+    public double claw_right_close = 0.7;
     public double claw_right_close_wide = 0.8;
     public double claw_left_close_wide = 0.8;
 

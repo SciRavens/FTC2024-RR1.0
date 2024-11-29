@@ -54,7 +54,7 @@ private int cur = 1;
             wrist.setPosStarting();
         } else if(gamepad2.b) {
             arm.setPosSpecimen();
-            sleep(750);
+            sleep(200);
             wrist.setPosSpecimen();
         }
     }

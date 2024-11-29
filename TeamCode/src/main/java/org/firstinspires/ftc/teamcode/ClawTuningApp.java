@@ -26,13 +26,14 @@ public class ClawTuningApp extends LinearOpMode {
         while (opModeIsActive()) {
             if (gamepad2.dpad_left) {
                 left_claw_tuning = true;
+                right_claw_tuning = false;
             } else if (gamepad2.dpad_right) {
                 right_claw_tuning = true;
+                left_claw_tuning = false;
             }
             if (right_claw_tuning) {
                 right_claw_operate();
-            }
-            if (left_claw_tuning) {
+            } else {
                 left_claw_operate();
             }
 
