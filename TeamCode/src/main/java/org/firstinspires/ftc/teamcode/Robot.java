@@ -47,7 +47,7 @@ public class Robot {
 
     // Arm positions
     public double arm_pos_starting = 0.8;
-    public  double arm_pos_sample = 0.1625;//
+    public  double arm_pos_sample = 0.1625;//1625
     public double arm_pos_sample_two = 0.32;
     public double arm_pos_basket = 0.45; //0.4
     public double arm_pos_specimen = 0.15;

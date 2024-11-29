@@ -10,7 +10,7 @@ public class Arm {
     private Robot robot;
     //    static private double pos_whitepixel = 0.215;
     public double target;
-
+    public boolean speed_control = false;
     private double max_speed = 0.002;
     private double threshold = 0.005;
 
@@ -20,25 +20,42 @@ public class Arm {
         this.robot = robot;
         this.target = robot.servoArm.getPosition();
     }
-    public void setPosStarting(){robot.servoArm.setPosition(robot.arm_pos_starting);}
+    public void setPosStarting(){
+        speed_control = false;
+        robot.servoArm.setPosition(robot.arm_pos_starting);
+    }
     public void setPosSample() {
+        speed_control = false;
         robot.servoArm.setPosition(robot.arm_pos_sample);
     }
     public void setPosSampleTwo() {
+        speed_control = false;
         robot.servoArm.setPosition(robot.arm_pos_sample_two);
     }
     public void setPosChamber() {
+        speed_control = false;
         robot.servoArm.setPosition(robot.arm_pos_chamber);
     }
     public void setPosSpecimen() {
+        speed_control = false;
         robot.servoArm.setPosition(robot.arm_pos_specimen);
     }
-    public void setPosBasket(){robot.servoArm.setPosition(robot.arm_pos_basket);}
+    public void setPosBasket(){
+        speed_control = false;
+        robot.servoArm.setPosition(robot.arm_pos_basket);
+    }
     public void setPosAbsolute(double pos) {
+        speed_control = false;
         robot.servoArm.setPosition(pos);
     }
 
+    public void setSCTarget(double target) {
+        speed_control = true;
+        this.target = target;
+    }
+
     public void operate() {
+        if (!speed_control) return;
         double curr_pos = robot.servoArm.getPosition();
         double diff = target - curr_pos;
         if (Math.abs(diff) > threshold) {

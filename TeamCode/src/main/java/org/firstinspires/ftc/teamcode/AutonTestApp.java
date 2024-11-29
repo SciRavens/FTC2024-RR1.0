@@ -39,19 +39,9 @@ public class AutonTestApp extends LinearOpMode {
 
 
         TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose)
-                // Modify the following to something like go to line etc.
-                //.lineToYSplineHeading(33, Math.toRadians(0))
-                //.waitSeconds(2)
-                //.setTangent(Math.toRadians(90))
-                //.lineToY(48)
-                //.setTangent(Math.toRadians(0))
-                //.lineToX(32)
-                //.strafeTo(new Vector2d(44.5, 30))
-                //.turn(Math.toRadians(180))
-                //.lineToX(47.5)
-                //.waitSeconds(2)
-                .strafeTo(new Vector2d(0,0));
-                //.waitSeconds(3);
+                .splineTo(new Vector2d(0,-27), Math.toRadians(90));
+
+        //.waitSeconds(3);
 
 
         Action wait = tab1.fresh()

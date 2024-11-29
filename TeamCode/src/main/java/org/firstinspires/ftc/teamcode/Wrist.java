@@ -11,44 +11,63 @@ public class Wrist {
     public double target;
     private double speed = 0.001;
 
+    public boolean speed_control = false;
+
     public Wrist(Robot robot) {
 
         this.robot = robot;
         this.target = robot.servoWrist.getPosition();
     }
 
-    public void setPosStarting(){robot.servoWrist.setPosition(robot.wrist_pos_starting);}
+    public void setPosStarting(){
+        speed_control = false;
+        robot.servoWrist.setPosition(robot.wrist_pos_starting);
+    }
     public void setPosSample()
     {
+        speed_control = false;
         robot.servoWrist.setPosition(robot.wrist_pos_sample);
     }
     public void setPosSampleTwo()
     {
+        speed_control = false;
         robot.servoWrist.setPosition(robot.wrist_pos_sample_two);
     }
     public void setPosSpecimen()
     {
+        speed_control = false;
         robot.servoWrist.setPosition(robot.wrist_pos_specimen);
     }
-    public void setPosHighChamber() {robot.servoWrist.setPosition(robot.wrist_pos_high_chamber);}
+    public void setPosHighChamber() {
+        speed_control = false;
+        robot.servoWrist.setPosition(robot.wrist_pos_high_chamber);}
    // public void setPosLowChamber() {robot.servoWrist.setPosition(robot.wrist_pos_low_chamber);}
 
     public void setPosBasket()
     {
+        speed_control = false;
         robot.servoWrist.setPosition(robot.wrist_pos_basket);
     }
 
     public void setPosChamberAuton()
     {
+        speed_control = false;
         robot.servoWrist.setPosition(robot.wrist_pos_chamber_auton);
     }
 
     public void setPosAbsolute(double pos)
     {
+        speed_control = false;
         robot.servoWrist.setPosition(pos);
     }
 
+    public void setSCTarget(double target) {
+        speed_control = true;
+        this.target = target;
+    }
+
     public void operate() {
+        if (!speed_control) return;
         double curr_pos = robot.servoWrist.getPosition();
         if (Math.abs(target - curr_pos) > speed) {
             double next_pos = curr_pos + speed * ((target > curr_pos) ? 1 : -1);
