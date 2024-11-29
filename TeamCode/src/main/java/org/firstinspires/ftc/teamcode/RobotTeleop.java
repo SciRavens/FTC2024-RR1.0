@@ -33,6 +33,8 @@ private int cur = 1;
         leds.setPattern(cur);
         while(opModeIsActive()) {
             DT.drive();
+            wrist.operate();
+            arm.operate();
 //            slider_operate();
             slider_joystick();
             arm_wrist_operate();
@@ -44,12 +46,8 @@ private int cur = 1;
     private void arm_wrist_operate()
     {
         if (gamepad2.a) {
-            arm.setPosSampleTwo();
-            sleep(800);
-            claw.open();
-            wrist.setPosSample();
-            sleep(800);
-            arm.setPosSample();
+            arm.target = robot.arm_pos_sample;
+            wrist.target = robot.wrist_pos_sample;
         } else if (gamepad2.y) {
             arm.setPosBasket();
             wrist.setPosBasket();
@@ -57,9 +55,15 @@ private int cur = 1;
             arm.setPosStarting();
             wrist.setPosStarting();
         } else if(gamepad2.b) {
-            arm.setPosSpecimen();
-            sleep(200);
-            wrist.setPosSpecimen();
+//            arm.setPosSpecimen();
+//            sleep(200);
+//            wrist.setPosSpecimen();
+            arm.target = robot.arm_pos_specimen;
+            wrist.target = robot.wrist_pos_specimen;
+        }
+        else if(gamepad2.dpad_up) {
+            arm.setPosChamber();
+            wrist.setPosHighChamber();
         }
     }
 

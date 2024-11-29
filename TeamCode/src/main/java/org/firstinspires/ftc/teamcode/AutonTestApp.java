@@ -28,7 +28,7 @@ public class AutonTestApp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // TBD: set the initial position
-        Pose2d initialPose = new Pose2d(0, 72, Math.toRadians(90));
+        Pose2d initialPose = new Pose2d(0, -70, Math.toRadians(90));
         robot = new Robot(hardwareMap, telemetry);
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot);
@@ -59,15 +59,18 @@ public class AutonTestApp extends LinearOpMode {
                 .build();
 
 
-        Action trajectoryActionPushSample = tab1.fresh()
-                .strafeTo(new Vector2d(0, 75))
-                .strafeTo(new Vector2d(36, 40))
-//                .strafeTo(new Vector2d(36, 9))
-//                .strafeTo(new Vector2d(52, 9))
-//                .turn(180)
-//                .strafeTo(new Vector2d(52, 35))
-//                .strafeTo(new Vector2d(25,35))
-//                .waitSeconds(0.5)
+        Action trajectoryActionPushSamples = tab1.fresh()
+                .lineToYConstantHeading(-45)
+                .setTangent(0)
+                .splineToConstantHeading(new Vector2d(35,-30), Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(53,0), Math.toRadians(0))
+                .setTangent(Math.toRadians(90))
+                .lineToYConstantHeading(-60)
+                .lineToY(-10)
+                .setTangent(0)
+                .lineToX(61)
+                .setTangent(Math.toRadians(90))
+                .lineToY(-60)
                 .build();
 
 
@@ -92,10 +95,10 @@ public class AutonTestApp extends LinearOpMode {
                         tab1.build(),
                         wait,
                         claw.openClawAction(),
-                        wait,
                         wrist.setSpecimenAction(),
+                        wrist.setStartingFoldAction(),
                         wait,
-                        trajectoryActionPushSample
+                        trajectoryActionPushSamples
 //                        wrist.setSpecimenAction(),
 //                        claw.closeClawAction(),
 //                        arm.setChamberAction(),

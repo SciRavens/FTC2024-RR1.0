@@ -31,7 +31,7 @@ public class Wrist {
         robot.servoWrist.setPosition(robot.wrist_pos_specimen);
     }
     public void setPosHighChamber() {robot.servoWrist.setPosition(robot.wrist_pos_high_chamber);}
-    public void setPosLowChamber() {robot.servoWrist.setPosition(robot.wrist_pos_low_chamber);}
+   // public void setPosLowChamber() {robot.servoWrist.setPosition(robot.wrist_pos_low_chamber);}
 
     public void setPosBasket()
     {
@@ -59,6 +59,18 @@ public class Wrist {
         robot.telemetry.update();
     }
 
+    public class WristStartingFoldAction implements Action {
+        @Override
+        public boolean run (@NonNull TelemetryPacket packet) {
+            setPosStarting();
+            return false;
+        }
+    }
+
+    public Action setStartingFoldAction() {
+        return new WristStartingFoldAction();
+    }
+
     public class WristHighChamberAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
@@ -70,16 +82,16 @@ public class Wrist {
         return new WristHighChamberAction();
     }
 
-    public class WristLowChamberAction implements Action {
-        @Override
-        public boolean run(@NonNull TelemetryPacket packet) {
-            setPosLowChamber();
-            return false;
-        }
-    }
-    public Action setLowChamberAction() {
-        return new WristLowChamberAction();
-    }
+//    public class WristLowChamberAction implements Action {
+//        @Override
+//        public boolean run(@NonNull TelemetryPacket packet) {
+//            setPosLowChamber();
+//            return false;
+//        }
+//    }
+//    public Action setLowChamberAction() {
+//        return new WristLowChamberAction();
+//    }
 
 
     public class WristSpecimenAction implements Action {
