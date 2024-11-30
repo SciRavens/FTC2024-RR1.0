@@ -101,16 +101,16 @@ public class Wrist {
         return new WristHighChamberAction();
     }
 
-//    public class WristLowChamberAction implements Action {
-//        @Override
-//        public boolean run(@NonNull TelemetryPacket packet) {
-//            setPosLowChamber();
-//            return false;
-//        }
-//    }
-//    public Action setLowChamberAction() {
-//        return new WristLowChamberAction();
-//    }
+    public class WristChamberAutonomousAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosChamberAuton();
+            return false;
+        }
+    }
+    public Action setLowChamberAction() {
+        return new WristChamberAutonomousAction();
+    }
 
 
     public class WristSpecimenAction implements Action {
@@ -135,15 +135,15 @@ public class Wrist {
         return new WristSampleAction();
     }
 
-    public class WristChamberActionAuton implements Action {
+    public class WristChamberAutonAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             setPosBasket();
             return false;
         }
     }
-    public Action setChamberActionAuton() {
-        return new WristChamberActionAuton();
+    public Action setChamberAutonAction() {
+        return new WristChamberAutonAction();
     }
 
 

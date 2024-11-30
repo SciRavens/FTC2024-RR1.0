@@ -51,6 +51,7 @@ public class Robot {
     public double arm_pos_sample_two = 0.32;
     public double arm_pos_basket = 0.45; //0.4
     public double arm_pos_specimen = 0.15;
+    public double arm_pos_autonomous_chamber = 0.425;
     public double arm_pos_chamber = 0.45;
 
     // Wrist positions
@@ -59,7 +60,7 @@ public class Robot {
     public double wrist_pos_sample_two = 0.4;
     public double wrist_pos_specimen = 0.4;
     public double wrist_pos_high_chamber = 0.6;
-    //public double wrist_pos_low_chamber = 0.65;
+    public double wrist_pos_autonomous_chamber = 0.45;
     public double wrist_pos_basket = 0.3; //0.65
 
     // Slider positions

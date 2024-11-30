@@ -79,8 +79,8 @@ public class AutonTestApp extends LinearOpMode {
         Actions.runBlocking(
                 new SequentialAction(
                         claw.closeClawAction(),
-                        arm.setChamberAction(),
-                        wrist.setHighChamberAction(),
+                        arm.setChamberAutonAction(),
+                        wrist.setChamberAutonAction(),
                         wait,
                         tab1.build(),
                         wait,

@@ -79,7 +79,14 @@ public class Arm {
         return new ArmChamberAction();
     }
 
-
+    public class ArmChamberAutonomousAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosChamber();
+            return false;
+        }
+    }
+    public Action setChamberAutonAction() {return new ArmChamberAction();}
     public class ArmSampleAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
