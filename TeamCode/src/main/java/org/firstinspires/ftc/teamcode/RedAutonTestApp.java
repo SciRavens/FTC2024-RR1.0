@@ -15,7 +15,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 
 @Config
 @Autonomous(name = "AutonTest", group = "Autonomous")
-public class AutonTestApp extends LinearOpMode {
+public class RedAutonTestApp extends LinearOpMode {
     public Robot robot;
     public DriveTrain DT;
     public Slider slider;
@@ -65,9 +65,9 @@ public class AutonTestApp extends LinearOpMode {
 
 
         Action trajectoryRotate180 = tab1.fresh()
-                        .turn(180)
-                        .waitSeconds(0.5)
-                        .build();
+                .turn(180)
+                .waitSeconds(0.5)
+                .build();
 
 
 
@@ -102,4 +102,3 @@ public class AutonTestApp extends LinearOpMode {
         telemetry.update();
     }
 }
-

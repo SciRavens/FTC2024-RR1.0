@@ -158,7 +158,16 @@ public class Wrist {
         return new WristBasketAction();
     }
 
-
+    public class setWristStartingAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosStarting();
+            return false;
+        }
+    }
+    public Action setWristStartingAction() {
+        return new setWristStartingAction();
+    }
 
 
 

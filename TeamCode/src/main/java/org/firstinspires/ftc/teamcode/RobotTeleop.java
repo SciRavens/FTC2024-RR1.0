@@ -55,11 +55,12 @@ private int cur = 1;
             arm.setPosStarting();
             wrist.setPosStarting();
         } else if(gamepad2.b) {
-//            arm.setPosSpecimen();
-//            sleep(200);
-//            wrist.setPosSpecimen();
             arm.setSCTarget(robot.arm_pos_specimen);
             wrist.setSCTarget(robot.wrist_pos_specimen);
+        }
+        else if(gamepad2.dpad_down) {
+            arm.setSCTarget(robot.arm_pos_sample_two);
+            wrist.setSCTarget(robot.wrist_pos_sample_two);
         }
         else if(gamepad2.dpad_up) {
             arm.setPosChamber();

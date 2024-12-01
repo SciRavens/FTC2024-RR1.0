@@ -120,6 +120,18 @@ public class Arm {
         return new ArmBasketAction();
     }
 
+    public class setStartingFoldAction implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            setPosStarting();
+            return false;
+        }
+    }
+    public Action setFoldAction() {
+        return new setStartingFoldAction();
+    }
+
 }
+
 
 
