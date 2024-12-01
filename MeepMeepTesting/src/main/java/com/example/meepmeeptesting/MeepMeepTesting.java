@@ -17,42 +17,48 @@ public class MeepMeepTesting {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, -70, Math.toRadians(90)))
                  // Specimens for red side
-                .splineTo(new Vector2d(0,-27), Math.toRadians(90))
-                .lineToYConstantHeading(-45)
-                .setTangent(0)
-                .splineToConstantHeading(new Vector2d(35,-30), Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(47,0), Math.toRadians(0))
-                .setTangent(Math.toRadians(90))
-                .lineToYConstantHeading(-60) // pushes first sample into the observation zone
-                .lineToY(-10)
-                .setTangent(0)
-                .lineToX(55)
-                .setTangent(Math.toRadians(90))
-                .lineToY(-60) // pushes second sample into the observation zone
-                .lineToY(-10)
-                .setTangent(Math.toRadians(0))
-                .lineToX(65)
-                .setTangent(Math.toRadians(90))
-                .lineToY(-60) // pushes third sample into the observation zone
-                .lineToY(-40)
-                .strafeTo(new Vector2d(46, -40))
-                .turn(Math.toRadians(180))
-                .strafeTo(new Vector2d(46,-51))
-                //wrist.setSampleAction()
-                //arm.setSampleAction()
-                //claw.closeClawAction()
-                //arm.setStartingFoldAction()
-                //wrist.setWristStartingAction()
-                .waitSeconds(1)
-                .strafeTo(new Vector2d(0,-50))
-                .turn(Math.toRadians(180))
-                //arm.setChamberAutonAction()
-                //wrist.setChamberAutonAction()
-                .splineTo(new Vector2d(0,-30), Math.toRadians(90))
-                //arm.setSampleAction()
-                //wrist.setSampleAction()
-                //claw.openClawAction
-                .splineTo(new Vector2d(47,-61), Math.toRadians(0))
+//                .splineTo(new Vector2d(0,-27), Math.toRadians(90))
+//                .lineToYConstantHeading(-45)
+//                //arm.setChamberAutonAction()
+//                //wrist.setChamberAutonAction()
+//                //arm.setSampleAction()
+//                //wrist.setSampleAction()
+//                //claw.openClawAction
+//                .waitSeconds(1)
+//                .setTangent(0)
+//                .splineToConstantHeading(new Vector2d(35,-30), Math.toRadians(90))
+//                .splineToConstantHeading(new Vector2d(47,0), Math.toRadians(0))
+//                .setTangent(Math.toRadians(90))
+//                .lineToYConstantHeading(-60) // pushes first sample into the observation zone
+//                .lineToY(-10)
+//                .setTangent(0)
+//                .lineToX(55)
+//                .setTangent(Math.toRadians(90))
+//                .lineToY(-60) // pushes second sample into the observation zone
+//                .lineToY(-10)
+//                .setTangent(Math.toRadians(0))
+//                .lineToX(65)
+//                .setTangent(Math.toRadians(90))
+//                .lineToY(-60) // pushes third sample into the observation zone
+//                .lineToY(-51)
+//                .strafeTo(new Vector2d(46, -51))
+//                .turn(Math.toRadians(180)) // sets up to pick up specimen
+//                //wrist.setSampleAction()
+//                //arm.setSampleAction()
+//                //claw.closeClawAction()
+//                //arm.setStartingFoldAction()
+//                //wrist.setWristStartingAction()
+//                .waitSeconds(1)
+////                .strafeTo(new Vector2d(0,-51))
+////                .turn(Math.toRadians(180))
+//                //arm.setChamberAutonAction()
+//                //wrist.setChamberAutonAction()
+//                .splineTo(new Vector2d(0,-30), Math.toRadians(90)) // places specimen
+//                .waitSeconds(1)
+//                //arm.setSampleAction()
+//                //wrist.setSampleAction()
+//                //claw.openClawAction
+//                .splineTo(new Vector2d(47,-61), Math.toRadians(0)) // parking
 
 
 
