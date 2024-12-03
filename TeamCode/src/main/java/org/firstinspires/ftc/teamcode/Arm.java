@@ -11,47 +11,48 @@ public class Arm {
     //    static private double pos_whitepixel = 0.215;
     public double target;
     public boolean speed_control = false;
-    private double max_speed = 0.002;
+    private double max_speed = 0.02;
     private double threshold = 0.005;
 
     private final double P = 0.01;
     public Arm(Robot robot) {
-
         this.robot = robot;
         this.target = robot.servoArm.getPosition();
     }
-    public void setPosStarting(){
-        speed_control = false;
+    public void setPosStarting(boolean sc){
+        speed_control = sc;
         robot.servoArm.setPosition(robot.arm_pos_starting);
     }
-    public void setPosSample() {
-        speed_control = false;
+    public void setPosSample(boolean sc) {
+        speed_control = sc;
         robot.servoArm.setPosition(robot.arm_pos_sample);
     }
-    public void setPosSampleTwo() {
-        speed_control = false;
+    public void setPosSampleTwo(boolean sc) {
+        speed_control = sc;
         robot.servoArm.setPosition(robot.arm_pos_sample_two);
     }
-    public void setPosChamber() {
-        speed_control = false;
+    public void setPosChamber(boolean sc) {
+        speed_control = sc;
         robot.servoArm.setPosition(robot.arm_pos_chamber);
     }
-    public void setPosSpecimen() {
-        speed_control = false;
+    public void setPosSpecimen(boolean sc) {
+        speed_control = sc;
         robot.servoArm.setPosition(robot.arm_pos_specimen);
     }
-    public void setPosBasket(){
-        speed_control = false;
+    public void setPosBasket(boolean sc){
+        speed_control = sc;
         robot.servoArm.setPosition(robot.arm_pos_basket);
     }
     public void setPosAbsolute(double pos) {
-        speed_control = false;
         robot.servoArm.setPosition(pos);
     }
 
     public void setSCTarget(double target) {
         speed_control = true;
         this.target = target;
+    }
+    public void setChamberPush() {
+        robot.servoArm.setPosition(robot.arm_pos_autonomous_chamber);
     }
 
     public void operate() {
@@ -71,7 +72,7 @@ public class Arm {
     public class ArmChamberAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosChamber();
+            setPosChamber(true);
             return false;
         }
     }
@@ -82,7 +83,7 @@ public class Arm {
     public class ArmChamberAutonomousAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosChamber();
+            setPosChamber(true);
             return false;
         }
     }
@@ -90,7 +91,7 @@ public class Arm {
     public class ArmSampleAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosSample();
+            setPosSample(true);
             return false;
         }
     }
@@ -101,7 +102,7 @@ public class Arm {
     public class ArmSpecimenAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosSpecimen();
+            setPosSpecimen(true);
             return false;
         }
     }
@@ -112,7 +113,7 @@ public class Arm {
     public class ArmBasketAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosBasket();
+            setPosBasket(true);
             return false;
         }
     }
@@ -123,7 +124,7 @@ public class Arm {
     public class setStartingFoldAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosStarting();
+            setPosStarting(true);
             return false;
         }
     }

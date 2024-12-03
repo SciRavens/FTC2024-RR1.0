@@ -11,7 +11,7 @@ public class Wrist {
     public double target;
     private double speed = 0.001;
 
-    public boolean speed_control = false;
+    public boolean speed_control = true;
 
     public Wrist(Robot robot) {
 
@@ -20,50 +20,55 @@ public class Wrist {
     }
 
     public void setPosStarting(){
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_starting);
     }
     public void setPosSample()
     {
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_sample);
     }
     public void setPosSampleTwo()
     {
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_sample_two);
     }
     public void setPosSpecimen()
     {
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_specimen);
     }
     public void setPosHighChamber() {
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_high_chamber);}
    // public void setPosLowChamber() {robot.servoWrist.setPosition(robot.wrist_pos_low_chamber);}
 
     public void setPosBasket()
     {
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_basket);
     }
 
     public void setPosChamberAuton()
     {
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_chamber_auton);
     }
 
     public void setPosAbsolute(double pos)
     {
-        speed_control = false;
+        speed_control = true;
         robot.servoWrist.setPosition(pos);
     }
 
     public void setSCTarget(double target) {
         speed_control = true;
         this.target = target;
+    }
+
+    public void setChamberWristPush() {
+        speed_control = true;
+        robot.servoWrist.setPosition(robot.wrist_pos_autonomous_chamber);
     }
 
     public void operate() {
