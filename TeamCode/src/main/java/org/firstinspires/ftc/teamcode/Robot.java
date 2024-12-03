@@ -38,12 +38,12 @@ public class Robot {
     public MecanumDrive mDrive;
 
     // Claw positions
-    public double claw_left_open = 0.8;
-    public double claw_right_open = 0.35;
-    public double claw_left_close = 0.45;
-    public double claw_right_close = 0.7;
-    public double claw_right_close_wide = 0.8;
-    public double claw_left_close_wide = 0.8;
+    public double claw_open = 0.4;
+    public double claw_close = 0.65;
+
+    //ClawAngle positions
+    public double claw_horizontal = 0.225;
+    public double claw_vertical = 0.55;
 
     // Arm positions
     public double arm_pos_starting = 0.8;

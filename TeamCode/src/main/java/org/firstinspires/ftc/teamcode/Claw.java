@@ -9,32 +9,24 @@ import androidx.annotation.NonNull;
 
 
 public class Claw {
-    Servo servoLeft;
-    Servo servoRight;
+    Servo servo;
     private boolean closed = true;
-    double left_close, left_open;
-    double right_close, right_open;
-    double left_close_wide, right_close_wide;
+    double close_pos;
+    double open_pos;
 
 
     public Claw(Robot robot) {
-        this.servoLeft = robot.servoCL;
-        this.left_close = robot.claw_left_close;
-        this.left_open = robot.claw_left_open;
-        this.servoRight = robot.servoCR;
-        this.right_close = robot.claw_right_close;
-        this.right_open = robot.claw_right_open;
-        this.left_close_wide = robot.claw_left_close_wide;
-        this.right_close_wide = robot.claw_right_close_wide;
-        servoLeft.setPosition(left_close);
-        servoRight.setPosition(right_close);
+        this.close_pos = robot.claw_close;
+        this.open_pos = robot.claw_open;
+        this.servo = robot.servoCL;
+        this.servo.setPosition(close_pos);
+        closed = true;
     }
 
     public void open()
     {
         if(closed) {
-            servoLeft.setPosition(left_open);
-            servoRight.setPosition(right_open);
+            servo.setPosition(open_pos);
             closed = false;
 
         }
@@ -42,27 +34,14 @@ public class Claw {
     public void close()
     {
         if (!closed) {
-            servoLeft.setPosition(left_close);
-           servoRight.setPosition(right_close);
-            closed = true;
-        }
-    }
-    public void close_wide()
-    {
-        if (!closed) {
-            servoLeft.setPosition(left_close_wide);
-            servoRight.setPosition(right_close_wide);
+            servo.setPosition(close_pos);
             closed = true;
         }
     }
 
 
-    public void setPosAbsoluteRight(double pos) {
-        servoRight.setPosition(pos);
-    }
-
-    public void setPosAbsoluteLeft(double pos) {
-        servoLeft.setPosition(pos);
+    public void setPosAbsolute(double pos) {
+        servo.setPosition(pos);
     }
 
     public class CloseClawAction implements Action {

@@ -16,17 +16,17 @@ public class FullTuningApp extends LinearOpMode {
     public double wrist_start_pos = 0.0;
     public double wrist_cur_pos = wrist_start_pos;
     public double wrist_inc = 0.05;
-    public double right_claw_start_pos = 0.0;
-    public double right_claw_cur_pos = right_claw_start_pos;
+    public double claw_angle_start_pos = 0.0;
+    public double claw_angle_cur_pos = claw_angle_start_pos;
     public double claw_inc = 0.05;
-    public double left_claw_start_pos = 0.0;
-    public double left_claw_cur_pos = left_claw_start_pos;
+    public double claw_start_pos = 0.0;
+    public double claw_cur_pos = claw_start_pos;
 
     public boolean buttonPressed = false;
     public boolean arm_tuning = true;
     public boolean wrist_tuning = false;
-    public boolean right_claw_tuning = true;
-    public boolean left_claw_tuning = false;
+    public boolean claw_angle_tuning = true;
+    public boolean claw_tuning = false;
     public int count = 0;
 
     @Override
@@ -47,11 +47,11 @@ public class FullTuningApp extends LinearOpMode {
                 arm_tuning = false;
             }
             if (gamepad2.x) {
-                right_claw_tuning = true;
-                left_claw_tuning = false;
+                claw_angle_tuning = true;
+                claw_tuning = false;
             } else if (gamepad2.b) {
-                right_claw_tuning = false;
-                left_claw_tuning = true;
+                claw_angle_tuning = false;
+                claw_tuning = true;
             }
             if (arm_tuning) {
                 arm_operate();
@@ -59,11 +59,11 @@ public class FullTuningApp extends LinearOpMode {
             if (wrist_tuning) {
                 wrist_operate();
             }
-            if (right_claw_tuning) {
-                right_claw_operate();
+            if (claw_angle_tuning) {
+                claw_angle_operate();
             }
-            if (left_claw_tuning) {
-                left_claw_operate();
+            if (claw_tuning) {
+                claw_operate();
             }
         }
     }
@@ -110,44 +110,44 @@ public class FullTuningApp extends LinearOpMode {
         robot.telemetry.addData("Wrist Current Value:", wrist_cur_pos);
         robot.telemetry.update();
     }
-    private void right_claw_operate()
+    private void claw_angle_operate()
     {
         if (gamepad2.y && !buttonPressed) {
-            if (right_claw_cur_pos < 0.9) {
-                right_claw_cur_pos += wrist_inc;
+            if (claw_angle_cur_pos < 0.9) {
+                claw_angle_cur_pos += wrist_inc;
             }
             buttonPressed = true;
         } else if (gamepad2.a && !buttonPressed) {
-            if (right_claw_cur_pos > 0.1) {
-                right_claw_cur_pos -= wrist_inc;
+            if (claw_angle_cur_pos > 0.1) {
+                claw_angle_cur_pos -= wrist_inc;
             }
             buttonPressed = true;
         } else {
             if (!gamepad2.dpad_up && !gamepad2.dpad_down)
                 buttonPressed = false;
         }
-        claw.setPosAbsoluteRight(right_claw_cur_pos);
-        robot.telemetry.addData("Right Claw Current Value:", right_claw_cur_pos);
+        robot.servoCR.setPosition(claw_angle_cur_pos);
+        robot.telemetry.addData("Claw Angle Current Value:", claw_angle_cur_pos);
         robot.telemetry.update();
     }
-    private void left_claw_operate()
+    private void claw_operate()
     {
         if (gamepad2.y && !buttonPressed) {
-            if (left_claw_cur_pos < 0.9) {
-                left_claw_cur_pos += wrist_inc;
+            if (claw_cur_pos < 0.9) {
+                claw_cur_pos += wrist_inc;
             }
             buttonPressed = true;
         } else if (gamepad2.a && !buttonPressed) {
-            if (left_claw_cur_pos > 0.1) {
-                left_claw_cur_pos -= wrist_inc;
+            if (claw_cur_pos > 0.1) {
+                claw_cur_pos -= wrist_inc;
             }
             buttonPressed = true;
         } else {
             if (!gamepad2.dpad_up && !gamepad2.dpad_down)
                 buttonPressed = false;
         }
-        claw.setPosAbsoluteLeft(left_claw_cur_pos);
-        robot.telemetry.addData("Left Claw Current Value:", left_claw_cur_pos);
+        robot.servoCL.setPosition(claw_cur_pos);
+        robot.telemetry.addData("Claw Current Value:", claw_cur_pos);
         robot.telemetry.update();
     }
 }
