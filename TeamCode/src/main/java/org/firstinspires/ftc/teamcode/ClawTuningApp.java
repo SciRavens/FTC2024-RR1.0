@@ -43,12 +43,12 @@ public class ClawTuningApp extends LinearOpMode {
 
     private void right_claw_operate() {
         if (gamepad2.dpad_up && !buttonPressed) {
-            if (right_claw_cur_pos < 0.9) {
+            if (right_claw_cur_pos <= 1.0) {
                 right_claw_cur_pos += claw_inc;
             }
             buttonPressed = true;
         } else if (gamepad2.dpad_down && !buttonPressed) {
-            if (right_claw_cur_pos > 0.1) {
+            if (right_claw_cur_pos >= 0.0) {
                 right_claw_cur_pos -= claw_inc;
             }
             buttonPressed = true;
@@ -64,12 +64,12 @@ public class ClawTuningApp extends LinearOpMode {
 
     private void left_claw_operate() {
         if (gamepad2.dpad_up && !buttonPressed) {
-                if (left_claw_cur_pos < 0.9) {
+                if (left_claw_cur_pos <= 1.00) {
                     left_claw_cur_pos += claw_inc;
                 }
                 buttonPressed = true;
             } else if (gamepad2.dpad_down && !buttonPressed) {
-                if (left_claw_cur_pos > 0.1) {
+                if (left_claw_cur_pos >= 0.00) {
                     left_claw_cur_pos -= claw_inc;
                 }
                 buttonPressed = true;
