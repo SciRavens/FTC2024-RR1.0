@@ -11,7 +11,7 @@ public class Wrist {
     public double target;
     private double speed = 0.001;
 
-    public boolean speed_control = true;
+    public boolean speed_control = false;
 
     public Wrist(Robot robot) {
 
@@ -20,44 +20,40 @@ public class Wrist {
     }
 
     public void setPosStarting(){
-        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_starting);
     }
     public void setPosSample()
     {
-        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_sample);
     }
     public void setPosSampleTwo()
     {
-        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_sample_two);
     }
     public void setPosSpecimen()
     {
-        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_specimen);
     }
     public void setPosHighChamber() {
-        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_high_chamber);}
    // public void setPosLowChamber() {robot.servoWrist.setPosition(robot.wrist_pos_low_chamber);}
 
     public void setPosBasket()
     {
-        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_basket);
     }
 
     public void setPosChamberAuton()
     {
-        speed_control = true;
         robot.servoWrist.setPosition(robot.wrist_pos_chamber_auton);
+    }
+
+    public void setChamberWristPush() {
+        robot.servoWrist.setPosition(robot.wrist_pos_autonomous_chamber);
     }
 
     public void setPosAbsolute(double pos)
     {
-        speed_control = true;
         robot.servoWrist.setPosition(pos);
     }
 
@@ -66,21 +62,19 @@ public class Wrist {
         this.target = target;
     }
 
-    public void setChamberWristPush() {
-        speed_control = true;
-        robot.servoWrist.setPosition(robot.wrist_pos_autonomous_chamber);
-    }
-
     public void operate() {
-        if (!speed_control) return;
-        double curr_pos = robot.servoWrist.getPosition();
-        if (Math.abs(target - curr_pos) > speed) {
-            double next_pos = curr_pos + speed * ((target > curr_pos) ? 1 : -1);
-            robot.servoWrist.setPosition(next_pos);
+        if (speed_control) {
+            double curr_pos = robot.servoWrist.getPosition();
+            if (Math.abs(target - curr_pos) > speed) {
+                double next_pos = curr_pos + speed * ((target > curr_pos) ? 1 : -1);
+                robot.servoWrist.setPosition(next_pos);
+            } else {
+                speed_control = false;
+            }
         }
-        robot.telemetry.addData("Wrist Curr Pos:", curr_pos);
+        robot.telemetry.addData("Wrist Curr Pos:", robot.servoWrist.getPosition());
         robot.telemetry.addData("Wrist Target:", this.target);
-        robot.telemetry.update();
+        robot.telemetry.addData("Wrist Speed Control: ", speed_control);
     }
 
     public class WristStartingFoldAction implements Action {

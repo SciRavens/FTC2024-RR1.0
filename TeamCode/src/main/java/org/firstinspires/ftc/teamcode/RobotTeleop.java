@@ -29,7 +29,7 @@ private int cur = 1;
 
         leds = new Leds(robot);
         leds.setPattern(0);
-        arm.setPosStarting(false);
+        arm.setPosStarting();
         wrist.setPosStarting();
         waitForStart();
         leds.setPattern(cur);
@@ -42,6 +42,7 @@ private int cur = 1;
             arm_wrist_operate();
             claw_operate();
             leds_operate();
+            robot.telemetry.update();
         }
     }
 
@@ -65,6 +66,7 @@ private int cur = 1;
             wrist.setSCTarget(robot.wrist_pos_sample_two);
         }
         else if(gamepad2.dpad_up) {
+            wrist.setPosStarting();
             arm.setSCTarget(robot.arm_pos_autonomous_chamber);
             wrist.setSCTarget(robot.wrist_pos_autonomous_chamber);
         }

@@ -11,7 +11,7 @@ public class Arm {
     //    static private double pos_whitepixel = 0.215;
     public double target;
     public boolean speed_control = false;
-    private double max_speed = 0.02;
+    private double max_speed = 0.01;
     private double threshold = 0.005;
 
     private final double P = 0.01;
@@ -19,28 +19,22 @@ public class Arm {
         this.robot = robot;
         this.target = robot.servoArm.getPosition();
     }
-    public void setPosStarting(boolean sc){
-        speed_control = sc;
+    public void setPosStarting(){
         robot.servoArm.setPosition(robot.arm_pos_starting);
     }
-    public void setPosSample(boolean sc) {
-        speed_control = sc;
+    public void setPosSample() {
         robot.servoArm.setPosition(robot.arm_pos_sample);
     }
-    public void setPosSampleTwo(boolean sc) {
-        speed_control = sc;
+    public void setPosSampleTwo() {
         robot.servoArm.setPosition(robot.arm_pos_sample_two);
     }
-    public void setPosChamber(boolean sc) {
-        speed_control = sc;
+    public void setPosChamber() {
         robot.servoArm.setPosition(robot.arm_pos_chamber);
     }
-    public void setPosSpecimen(boolean sc) {
-        speed_control = sc;
+    public void setPosSpecimen() {
         robot.servoArm.setPosition(robot.arm_pos_specimen);
     }
-    public void setPosBasket(boolean sc){
-        speed_control = sc;
+    public void setPosBasket(){
         robot.servoArm.setPosition(robot.arm_pos_basket);
     }
     public void setPosAbsolute(double pos) {
@@ -56,23 +50,27 @@ public class Arm {
     }
 
     public void operate() {
-        if (!speed_control) return;
-        double curr_pos = robot.servoArm.getPosition();
-        double diff = target - curr_pos;
-        if (Math.abs(diff) > threshold) {
-            double next_speed = Math.max(Math.min(diff * P, max_speed), -max_speed);
-            double next_pos = curr_pos + next_speed;
-            robot.servoArm.setPosition(next_pos);
+        if (speed_control) {
+            double curr_pos = robot.servoArm.getPosition();
+            double diff = target - curr_pos;
+            if (Math.abs(diff) > threshold) {
+                double next_speed = Math.max(Math.min(diff * P, max_speed), -max_speed);
+                double next_pos = curr_pos + next_speed;
+                robot.servoArm.setPosition(next_pos);
+            } else {
+                speed_control = false;
+            }
         }
-        robot.telemetry.addData("Arm Curr Pos:", curr_pos);
+        robot.telemetry.addData("Arm Curr Pos:", robot.servoArm.getPosition());
         robot.telemetry.addData("Arm Target:", this.target);
-        robot.telemetry.update();
+        robot.telemetry.addData("Arm Speed Control: ", speed_control);
+        //robot.telemetry.update();
     }
 
     public class ArmChamberAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosChamber(true);
+            setPosChamber();
             return false;
         }
     }
@@ -83,7 +81,7 @@ public class Arm {
     public class ArmChamberAutonomousAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosChamber(true);
+            setPosChamber();
             return false;
         }
     }
@@ -91,7 +89,7 @@ public class Arm {
     public class ArmSampleAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosSample(true);
+            setPosSample();
             return false;
         }
     }
@@ -102,7 +100,7 @@ public class Arm {
     public class ArmSpecimenAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosSpecimen(true);
+            setPosSpecimen();
             return false;
         }
     }
@@ -113,7 +111,7 @@ public class Arm {
     public class ArmBasketAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosBasket(true);
+            setPosBasket();
             return false;
         }
     }
@@ -124,7 +122,7 @@ public class Arm {
     public class setStartingFoldAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosStarting(true);
+            setPosStarting();
             return false;
         }
     }
