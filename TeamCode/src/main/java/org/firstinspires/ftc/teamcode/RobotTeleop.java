@@ -12,6 +12,7 @@ public class RobotTeleop extends LinearOpMode {
     public Arm arm;
     public Wrist wrist;
     public Claw claw;
+    public ClawAngle clawAngle;
 
     RevBlinkinLedDriver.BlinkinPattern pattern;
     Leds leds;
@@ -24,11 +25,12 @@ private int cur = 1;
         arm = new Arm(robot);
         wrist = new Wrist(robot);
         claw = new Claw(robot);
+        clawAngle = new ClawAngle(robot);
 
         leds = new Leds(robot);
         leds.setPattern(0);
-        arm.setPosStarting();
-        wrist.setPosStarting();
+        arm.setPosStarting(false);
+        wrist.setPosStarting(false);
         waitForStart();
         leds.setPattern(cur);
         while(opModeIsActive()) {
@@ -40,31 +42,49 @@ private int cur = 1;
             arm_wrist_operate();
             claw_operate();
             leds_operate();
+            robot.telemetry.update();
         }
     }
 
     private void arm_wrist_operate()
     {
-        if (gamepad2.a) {
-            arm.setSCTarget(robot.arm_pos_sample);
-            wrist.setSCTarget(robot.wrist_pos_sample);
+        if (gamepad2.dpad_down) {
+            arm.setPosSample(true);
+            wrist.setPosSample(true);
+            //arm.setSCTarget(robot.arm_pos_sample);
+            //wrist.setSCTarget(robot.wrist_pos_sample);
         } else if (gamepad2.y) {
-            arm.setPosBasket();
-            wrist.setPosBasket();
+            arm.setPosBasket(true);
+            wrist.setPosBasket(true);
+            //arm.setSCTarget(robot.arm_pos_basket);
+            //wrist.setSCTarget(robot.wrist_pos_basket);
         } else if(gamepad2.x) {
-            arm.setPosStarting();
-            wrist.setPosStarting();
+            arm.setPosStarting(true);
+            wrist.setPosStarting(true);
+            //arm.setSCTarget(robot.arm_pos_starting);
+            //wrist.setSCTarget(robot.wrist_pos_starting);
         } else if(gamepad2.b) {
-            arm.setSCTarget(robot.arm_pos_specimen);
-            wrist.setSCTarget(robot.wrist_pos_specimen);
+            arm.setPosSpecimen(true);
+            wrist.setPosSpecimen(true);
+            //arm.setSCTarget(robot.arm_pos_specimen);
+            //wrist.setSCTarget(robot.wrist_pos_specimen);
         }
-        else if(gamepad2.dpad_down) {
-            arm.setSCTarget(robot.arm_pos_sample_two);
-            wrist.setSCTarget(robot.wrist_pos_sample_two);
+        else if(gamepad2.a){
+            arm.setPosSampleTwo(true);
+            wrist.setPosSampleTwo(true);
+            //arm.setSCTarget(robot.arm_pos_sample_two);
+            //wrist.setSCTarget(robot.wrist_pos_sample_two);
         }
         else if(gamepad2.dpad_up) {
-            arm.setPosChamber();
-            wrist.setPosHighChamber();
+            // TBD: fix this
+            arm.setSCTarget(robot.arm_pos_autonomous_chamber);
+            wrist.setSCTarget(robot.wrist_pos_autonomous_chamber);
+        }
+        else if(gamepad2.dpad_right) {
+            clawAngle.setHorizontal();
+        }
+        else if(gamepad2.dpad_left) {
+            clawAngle.setVertical();
         }
     }
 

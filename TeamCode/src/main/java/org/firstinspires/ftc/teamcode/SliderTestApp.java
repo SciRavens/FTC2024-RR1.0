@@ -27,8 +27,8 @@ private int cur = 1;
 
         leds = new Leds(robot);
         leds.setPattern(0);
-        arm.setPosStarting();
-        wrist.setPosStarting();
+        arm.setPosStarting(false);
+        wrist.setPosStarting(false);
         waitForStart();
         leds.setPattern(cur);
         while(opModeIsActive()) {
@@ -44,17 +44,17 @@ private int cur = 1;
     private void arm_wrist_operate()
     {
         if (gamepad2.a) {
-            arm.setPosSample();
-            wrist.setPosSample();
+            arm.setPosSample(true);
+            wrist.setPosSample(true);
         } else if (gamepad2.x) {
-            arm.setPosBasket();
-            wrist.setPosBasket();
+            arm.setPosBasket(true);
+            wrist.setPosBasket(true);
         } else if(gamepad2.y) {
-            arm.setPosChamber();
-            wrist.setPosHighChamber();
+            arm.setPosChamber(true);
+            wrist.setPosHighChamber(true);
         } else if(gamepad2.b) {
-            arm.setPosSpecimen();
-            wrist.setPosSpecimen();
+            arm.setPosSpecimen(true);
+            wrist.setPosSpecimen(true);
         }
     }
 
