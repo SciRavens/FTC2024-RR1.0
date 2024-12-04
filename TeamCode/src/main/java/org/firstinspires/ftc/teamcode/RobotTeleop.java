@@ -29,8 +29,8 @@ private int cur = 1;
 
         leds = new Leds(robot);
         leds.setPattern(0);
-        arm.setPosStarting();
-        wrist.setPosStarting();
+        arm.setPosStarting(false);
+        wrist.setPosStarting(false);
         waitForStart();
         leds.setPattern(cur);
         while(opModeIsActive()) {
@@ -49,24 +49,34 @@ private int cur = 1;
     private void arm_wrist_operate()
     {
         if (gamepad2.dpad_down) {
-            arm.setSCTarget(robot.arm_pos_sample);
-            wrist.setSCTarget(robot.wrist_pos_sample);
+            arm.setPosSample(true);
+            wrist.setPosSample(true);
+            //arm.setSCTarget(robot.arm_pos_sample);
+            //wrist.setSCTarget(robot.wrist_pos_sample);
         } else if (gamepad2.y) {
-            arm.setSCTarget(robot.arm_pos_basket);
-            wrist.setSCTarget(robot.wrist_pos_basket);
+            arm.setPosBasket(true);
+            wrist.setPosBasket(true);
+            //arm.setSCTarget(robot.arm_pos_basket);
+            //wrist.setSCTarget(robot.wrist_pos_basket);
         } else if(gamepad2.x) {
-            arm.setSCTarget(robot.arm_pos_starting);
-            wrist.setSCTarget(robot.wrist_pos_starting);
+            arm.setPosStarting(true);
+            wrist.setPosStarting(true);
+            //arm.setSCTarget(robot.arm_pos_starting);
+            //wrist.setSCTarget(robot.wrist_pos_starting);
         } else if(gamepad2.b) {
-            arm.setSCTarget(robot.arm_pos_specimen);
-            wrist.setSCTarget(robot.wrist_pos_specimen);
+            arm.setPosSpecimen(true);
+            wrist.setPosSpecimen(true);
+            //arm.setSCTarget(robot.arm_pos_specimen);
+            //wrist.setSCTarget(robot.wrist_pos_specimen);
         }
         else if(gamepad2.a){
-            arm.setSCTarget(robot.arm_pos_sample_two);
-            wrist.setSCTarget(robot.wrist_pos_sample_two);
+            arm.setPosSampleTwo(true);
+            wrist.setPosSampleTwo(true);
+            //arm.setSCTarget(robot.arm_pos_sample_two);
+            //wrist.setSCTarget(robot.wrist_pos_sample_two);
         }
         else if(gamepad2.dpad_up) {
-            wrist.setPosStarting();
+            // TBD: fix this
             arm.setSCTarget(robot.arm_pos_autonomous_chamber);
             wrist.setSCTarget(robot.wrist_pos_autonomous_chamber);
         }

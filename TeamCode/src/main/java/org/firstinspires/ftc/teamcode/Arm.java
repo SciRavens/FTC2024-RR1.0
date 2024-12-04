@@ -19,23 +19,47 @@ public class Arm {
         this.robot = robot;
         this.target = robot.servoArm.getPosition();
     }
-    public void setPosStarting(){
-        robot.servoArm.setPosition(robot.arm_pos_starting);
+    public void setPosStarting(boolean sc_on){
+        if (sc_on) {
+            setSCTarget(robot.arm_pos_starting);
+        } else {
+            robot.servoArm.setPosition(robot.arm_pos_starting);
+        }
     }
-    public void setPosSample() {
-        robot.servoArm.setPosition(robot.arm_pos_sample);
+    public void setPosSample(boolean sc_on) {
+        if (sc_on) {
+            setSCTarget(robot.arm_pos_sample);
+        } else {
+            robot.servoArm.setPosition(robot.arm_pos_sample);
+        }
     }
-    public void setPosSampleTwo() {
-        robot.servoArm.setPosition(robot.arm_pos_sample_two);
+    public void setPosSampleTwo(boolean sc_on) {
+        if (sc_on) {
+            setSCTarget(robot.arm_pos_sample_two);
+        } else {
+            robot.servoArm.setPosition(robot.arm_pos_sample_two);
+        }
     }
-    public void setPosChamber() {
-        robot.servoArm.setPosition(robot.arm_pos_chamber);
+    public void setPosChamber(boolean sc_on) {
+        if (sc_on) {
+            setSCTarget(robot.arm_pos_chamber);
+        } else {
+            robot.servoArm.setPosition(robot.arm_pos_chamber);
+        }
     }
-    public void setPosSpecimen() {
-        robot.servoArm.setPosition(robot.arm_pos_specimen);
+    public void setPosSpecimen(boolean sc_on) {
+        if (sc_on) {
+            setSCTarget(robot.arm_pos_specimen);
+        } else {
+            robot.servoArm.setPosition(robot.arm_pos_specimen);
+        }
     }
-    public void setPosBasket(){
-        robot.servoArm.setPosition(robot.arm_pos_basket);
+    public void setPosBasket(boolean sc_on){
+        if (sc_on) {
+            setSCTarget(robot.arm_pos_basket);
+        } else {
+            robot.servoArm.setPosition(robot.arm_pos_basket);
+        }
     }
     public void setPosAbsolute(double pos) {
         robot.servoArm.setPosition(pos);
@@ -70,7 +94,7 @@ public class Arm {
     public class ArmChamberAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosChamber();
+            setPosChamber(false);
             return false;
         }
     }
@@ -81,7 +105,7 @@ public class Arm {
     public class ArmChamberAutonomousAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosChamber();
+            setPosChamber(false);
             return false;
         }
     }
@@ -89,7 +113,7 @@ public class Arm {
     public class ArmSampleAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosSample();
+            setPosSample(false);
             return false;
         }
     }
@@ -100,7 +124,7 @@ public class Arm {
     public class ArmSpecimenAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosSpecimen();
+            setPosSpecimen(false);
             return false;
         }
     }
@@ -111,7 +135,7 @@ public class Arm {
     public class ArmBasketAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosBasket();
+            setPosBasket(false);
             return false;
         }
     }
@@ -122,7 +146,7 @@ public class Arm {
     public class setStartingFoldAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            setPosStarting();
+            setPosStarting(false);
             return false;
         }
     }
