@@ -80,10 +80,10 @@ private int cur = 1;
             arm.setSCTarget(robot.arm_pos_autonomous_chamber);
             wrist.setSCTarget(robot.wrist_pos_autonomous_chamber);
         }
-        else if(gamepad2.dpad_right) {
+        else if(gamepad2.dpad_left) {
             clawAngle.setHorizontal();
         }
-        else if(gamepad2.dpad_left) {
+        else if(gamepad2.dpad_right) {
             clawAngle.setVertical();
         }
     }
