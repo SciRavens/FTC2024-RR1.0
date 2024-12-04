@@ -11,7 +11,7 @@ public class Arm {
     //    static private double pos_whitepixel = 0.215;
     public double target;
     public boolean speed_control = false;
-    private double max_speed = 0.01;
+    private double max_speed = 0.001;
     private double threshold = 0.005;
 
     private final double P = 0.01;
