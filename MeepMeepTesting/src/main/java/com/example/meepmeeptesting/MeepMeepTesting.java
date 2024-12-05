@@ -15,7 +15,7 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, -70, Math.toRadians(90)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 70, Math.toRadians(0)))
                  //SPECIMEN FOR RED SIDE
 //                .splineTo(new Vector2d(0,-27), Math.toRadians(90))
 //                .lineToYConstantHeading(-45)
@@ -128,41 +128,41 @@ public class MeepMeepTesting {
                 //arm.setStartingFoldAction()
                 //wrist.setWristStartingAction()
                 .lineToYConstantHeading(45)
-                .strafeTo(new Vector2d(48, 45)) //goes toward first sample
+                .splineTo(new Vector2d(48, 25), Math.toRadians(270)) //goes toward first sample
                 .setTangent(Math.toRadians(90))
                 .lineToY(37)
                 //arm.setSampleAction()
                 //wrist.setSampleAction()
                 //claw.closeClawAction()
-                .lineToY(52)
-                //arm.setBasketAction()
-                //wrist.setBasketAction()
-                .turn(Math.toRadians(135))
-                .setTangent(Math.toRadians(225))
-                .lineToY(59)
-                //claw.openClawAction() // drops first sample in basket
-                .lineToY(52)
-                .turnTo(Math.toRadians(90))
-                //arm.setStartingFoldAction()
-                //wrist.setWristStartingAction()
-                .strafeTo(new Vector2d(58.5, 52)) // goes toward second sample
-                .lineToY(37)
-                //arm.setSampleAction()
-                //wrist.setSampleAction()
-                //claw.closeClawAction()
-                .lineToY(52)
-                //arm.setBasketAction()
-                //wrist.setBasketAction()
-                .turn(Math.toRadians(135))
-                .setTangent(Math.toRadians(225))
-                .lineToY(59)
-                //claw.openClawAction() // drops second sample in basket
-                .lineToY(52)
-                .turnTo(Math.toRadians(90))
-                //arm.setStartingFoldAction()
-                //wrist.setWristStartingAction()
-                .lineToY(56.5)
-                .lineToY(52)
+//                .lineToY(52)
+//                //arm.setBasketAction()
+//                //wrist.setBasketAction()
+//                .turn(Math.toRadians(135))
+//                .setTangent(Math.toRadians(225))
+//                .lineToY(59)
+//                //claw.openClawAction() // drops first sample in basket
+//                .lineToY(52)
+//                .turnTo(Math.toRadians(90))
+//                //arm.setStartingFoldAction()
+//                //wrist.setWristStartingAction()
+//                .strafeTo(new Vector2d(58.5, 52)) // goes toward second sample
+//                .lineToY(37)
+//                //arm.setSampleAction()
+//                //wrist.setSampleAction()
+//                //claw.closeClawAction()
+//                .lineToY(52)
+//                //arm.setBasketAction()
+//                //wrist.setBasketAction()
+//                .turn(Math.toRadians(135))
+//                .setTangent(Math.toRadians(225))
+//                .lineToY(59)
+//                //claw.openClawAction() // drops second sample in basket
+//                .lineToY(52)
+//                .turnTo(Math.toRadians(90))
+//                //arm.setStartingFoldAction()
+//                //wrist.setWristStartingAction()
+//                .lineToY(56.5)
+//                .lineToY(52)
                 .build());
 
 
