@@ -28,7 +28,7 @@ public class BlueAutonTestApp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // TBD: set the initial position
-        Pose2d initialPose = new Pose2d(0, -70, Math.toRadians(90));
+        Pose2d initialPose = new Pose2d(0, 70, Math.toRadians(90));
         robot = new Robot(hardwareMap, telemetry);
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot);
@@ -39,7 +39,8 @@ public class BlueAutonTestApp extends LinearOpMode {
 
 
         TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose)
-                .splineTo(new Vector2d(0,-27), Math.toRadians(90));
+//                .setTangent(Math.toRadians(0))
+                .lineToY(25);
 
         //.waitSeconds(3);
 
@@ -69,26 +70,29 @@ public class BlueAutonTestApp extends LinearOpMode {
                         .waitSeconds(0.5)
                         .build();
 
-
-
         Actions.runBlocking(claw.closeClawAction());
-        waitForStart();
+        Actions.runBlocking(arm.setFoldAction());
+        Actions.runBlocking(wrist.setStartingFoldAction());
 
+        waitForStart();
         if (isStopRequested()) return;
 
         Actions.runBlocking(
                 new SequentialAction(
-                        claw.closeClawAction(),
-                        arm.setChamberAutonAction(),
-                        wrist.setChamberAutonAction(),
-                        wait,
+                        arm.setChamberAction(),
+                        wrist.setHighChamberAction(),
                         tab1.build(),
                         wait,
-                        claw.openClawAction(),
-                        wrist.setSpecimenAction(),
-                        wrist.setStartingFoldAction(),
-                        wait,
-                        trajectoryActionPushSamples
+                        slider.sliderHighChamberAction()
+//                        arm.setSampleAction(),
+//                        wrist.setSampleAction(),
+//                        claw.openClawAction()
+//                        wait,
+//                        claw.openClawAction(),
+//                        wrist.setSpecimenAction(),
+//                        wrist.setStartingFoldAction(),
+//                        wait,
+//                        trajectoryActionPushSamples
 //                        wrist.setSpecimenAction(),
 //                        claw.closeClawAction(),
 //                        arm.setChamberAction(),

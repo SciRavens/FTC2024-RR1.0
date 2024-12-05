@@ -59,8 +59,8 @@ private int cur = 1;
             //arm.setSCTarget(robot.arm_pos_basket);
             //wrist.setSCTarget(robot.wrist_pos_basket);
         } else if(gamepad2.x) {
-            arm.setPosStarting(true);
-            wrist.setPosStarting(true);
+            arm.setPosStarting(false);
+            wrist.setPosStarting(false);
             //arm.setSCTarget(robot.arm_pos_starting);
             //wrist.setSCTarget(robot.wrist_pos_starting);
         } else if(gamepad2.b) {
@@ -77,13 +77,13 @@ private int cur = 1;
         }
         else if(gamepad2.dpad_up) {
             // TBD: fix this
-            arm.setSCTarget(robot.arm_pos_autonomous_chamber);
-            wrist.setSCTarget(robot.wrist_pos_autonomous_chamber);
-        }
-        else if(gamepad2.dpad_left) {
-            clawAngle.setHorizontal();
+            arm.setSCTarget(robot.arm_pos_chamber);
+            wrist.setSCTarget(robot.wrist_pos_high_chamber);
         }
         else if(gamepad2.dpad_right) {
+            clawAngle.setHorizontal();
+        }
+        else if(gamepad2.dpad_left) {
             clawAngle.setVertical();
         }
     }

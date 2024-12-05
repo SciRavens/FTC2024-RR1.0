@@ -15,7 +15,7 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 70, Math.toRadians(0)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 70, Math.toRadians(180)))
                  //SPECIMEN FOR RED SIDE
 //                .splineTo(new Vector2d(0,-27), Math.toRadians(90))
 //                .lineToYConstantHeading(-45)
@@ -120,20 +120,22 @@ public class MeepMeepTesting {
                 //claw.closeClawAction()
                 //arm.setChamberAutonAction()
                 //wrist.setChamberAutonAction()
-                .splineTo(new Vector2d(0,27), Math.toRadians(90))
+                .setTangent(Math.toRadians(270))
+                .lineToY(27)
                 .waitSeconds(1)
                 //arm.setSampleAction()
                 //wrist.setSampleAction()
                 //claw.openClawAction
                 //arm.setStartingFoldAction()
                 //wrist.setWristStartingAction()
-                .lineToYConstantHeading(45)
-                .splineTo(new Vector2d(48, 25), Math.toRadians(270)) //goes toward first sample
-                .setTangent(Math.toRadians(90))
-                .lineToY(37)
-                //arm.setSampleAction()
-                //wrist.setSampleAction()
-                //claw.closeClawAction()
+                //.setTangent(Math.toRadians(360))
+              // .lineToY(45)
+//                .splineTo(new Vector2d(48, 25), Math.toRadians(270)) //goes toward first sample
+//                .setTangent(Math.toRadians(90))
+//                .lineToY(37)
+//                //arm.setSampleAction()
+//                //wrist.setSampleAction()
+//                //claw.closeClawAction()
 //                .lineToY(52)
 //                //arm.setBasketAction()
 //                //wrist.setBasketAction()

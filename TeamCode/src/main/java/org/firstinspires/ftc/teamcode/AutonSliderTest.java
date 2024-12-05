@@ -41,8 +41,8 @@ public class AutonSliderTest extends LinearOpMode {
 
         Actions.runBlocking(
                 new SequentialAction(
-                        //slider.sliderHighChamberAction()
-                        slider.sliderHighBasketAction()
+                        slider.sliderHighChamberAction()
+//                        slider.sliderHighBasketAction()
                 )
         );
     }

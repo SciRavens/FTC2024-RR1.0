@@ -62,7 +62,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(-1);
+                setPower(-auto_power);
                 initialized = true;
             }
 
@@ -75,6 +75,9 @@ public class Slider extends EncoderMotorOps {
                 return false;
             }
         }
+//        robot.telemetry.addData("Arm Curr Pos:", robot.servoArm.getPosition());
+//        robot.telemetry.addData("Arm Target:", this.target);
+//        robot.telemetry.addData("Arm Speed Control: ", speed_control);
     }
     public Action sliderFoldAction() {
         return new SliderFold();
@@ -86,7 +89,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(1);
+                setPower(auto_power);
                 initialized = true;
             }
 
@@ -110,7 +113,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(1);
+                setPower(auto_power);
                 initialized = true;
             }
 
@@ -130,17 +133,22 @@ public class Slider extends EncoderMotorOps {
 
     public class SliderHighChamber implements Action {
         private boolean initialized = false;
+        private int counter = 0;
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(1);
+                setPower(auto_power);
                 initialized = true;
             }
 
             double pos = getCurrentPosition();
             packet.put("sliderPos", pos);
             if (pos < robot.slider_HighChamber_ticks) {
+                setPower(auto_power);
+                robot.telemetry.addData("Slider Position:", pos);
+                robot.telemetry.addData("Slider Counter:", counter++);
+                robot.telemetry.update();
                 return true;
             } else {
                 setPower(0);
@@ -158,7 +166,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(1);
+                setPower(auto_power);
                 initialized = true;
             }
 
@@ -182,7 +190,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(1);
+                setPower(auto_power);
                 initialized = true;
             }
 
@@ -206,7 +214,7 @@ public class Slider extends EncoderMotorOps {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(1);
+                setPower(auto_power);
                 initialized = true;
             }
 
