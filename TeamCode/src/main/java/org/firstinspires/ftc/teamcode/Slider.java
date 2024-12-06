@@ -10,7 +10,7 @@ public class Slider extends EncoderMotorOps {
     private Robot robot;
     private Gamepad gamepad;
     private double manual_speed_factor = 1.0;
-    static final private double auto_power = 0.5;
+    static final private double auto_power = 1;
     static final private int pos_max = 7800;
     static final private int pos_min = 0;
 
@@ -83,19 +83,28 @@ public class Slider extends EncoderMotorOps {
         return new SliderFold();
     }
 
+    private int counter = 0;
+
     public class SliderInitialPose implements Action {
         private boolean initialized = false;
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                setPower(auto_power);
+                setPower(-auto_power);
                 initialized = true;
             }
 
             double pos = getCurrentPosition();
+            robot.telemetry.addData("Slider Position:", pos);
+            robot.telemetry.addData("Slider Counter:", counter++);
+            robot.telemetry.update();
             packet.put("sliderPos", pos);
-            if (pos < robot.slider_Intial_Pose_ticks) {
+            if (pos > robot.slider_Intial_Pose_ticks) {
+                setPower(-auto_power);
+                robot.telemetry.addData("Slider Position:", pos);
+                robot.telemetry.addData("Slider Counter:", counter++);
+                robot.telemetry.update();
                 return true;
             } else {
                 setPower(0);
@@ -120,6 +129,10 @@ public class Slider extends EncoderMotorOps {
             double pos = getCurrentPosition();
             packet.put("sliderPos", pos);
             if (pos < robot.slider_LowChamber_ticks) {
+                setPower(auto_power);
+                robot.telemetry.addData("Slider Position:", pos);
+                robot.telemetry.addData("Slider Counter:", counter++);
+                robot.telemetry.update();
                 return true;
             } else {
                 setPower(0);
@@ -173,6 +186,10 @@ public class Slider extends EncoderMotorOps {
             double pos = getCurrentPosition();
             packet.put("sliderPos", pos);
             if (pos < robot.slider_HighBasket_ticks) {
+                setPower(auto_power);
+                robot.telemetry.addData("Slider Position:", pos);
+                robot.telemetry.addData("Slider Counter:", counter++);
+                robot.telemetry.update();
                 return true;
             } else {
                 setPower(0);
@@ -197,6 +214,10 @@ public class Slider extends EncoderMotorOps {
             double pos = getCurrentPosition();
             packet.put("sliderPos", pos);
             if (pos < robot.slider_LowBasket_ticks) {
+                setPower(auto_power);
+                robot.telemetry.addData("Slider Position:", pos);
+                robot.telemetry.addData("Slider Counter:", counter++);
+                robot.telemetry.update();
                 return true;
             } else {
                 setPower(0);
@@ -221,6 +242,10 @@ public class Slider extends EncoderMotorOps {
             double pos = getCurrentPosition();
             packet.put("sliderPos", pos);
             if (pos < robot.slider_ChamberAuton_ticks) {
+                setPower(auto_power);
+                robot.telemetry.addData("Slider Position:", pos);
+                robot.telemetry.addData("Slider Counter:", counter++);
+                robot.telemetry.update();
                 return true;
             } else {
                 setPower(0);

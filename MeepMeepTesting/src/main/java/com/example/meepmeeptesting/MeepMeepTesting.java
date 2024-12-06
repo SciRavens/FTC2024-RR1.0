@@ -15,7 +15,7 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 70, Math.toRadians(180)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-12, 70, Math.toRadians(180)))
                  //SPECIMEN FOR RED SIDE
 //                .splineTo(new Vector2d(0,-27), Math.toRadians(90))
 //                .lineToYConstantHeading(-45)
@@ -117,12 +117,15 @@ public class MeepMeepTesting {
 
 
                 // SAMPLES FOR BLUE SIDE
+                .strafeTo(new Vector2d(-70,25))
+                .strafeTo(new Vector2d(-36,5))
+                .strafeTo(new Vector2d(-42,5))
                 //claw.closeClawAction()
                 //arm.setChamberAutonAction()
                 //wrist.setChamberAutonAction()
-                .setTangent(Math.toRadians(270))
-                .lineToY(27)
-                .waitSeconds(1)
+//                .setTangent(Math.toRadians(270))
+//                .lineToY(27)
+//                .waitSeconds(1)
                 //arm.setSampleAction()
                 //wrist.setSampleAction()
                 //claw.openClawAction

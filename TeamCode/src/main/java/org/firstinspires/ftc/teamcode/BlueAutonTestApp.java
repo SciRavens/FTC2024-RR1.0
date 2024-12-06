@@ -28,7 +28,7 @@ public class BlueAutonTestApp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // TBD: set the initial position
-        Pose2d initialPose = new Pose2d(0, 70, Math.toRadians(90));
+        Pose2d initialPose = new Pose2d(-12, 70, Math.toRadians(90));
         robot = new Robot(hardwareMap, telemetry);
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot);
@@ -40,7 +40,7 @@ public class BlueAutonTestApp extends LinearOpMode {
 
         TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose)
 //                .setTangent(Math.toRadians(0))
-                .lineToY(25);
+                .strafeTo(new Vector2d(-12,17.5));
 
         //.waitSeconds(3);
 
@@ -51,19 +51,22 @@ public class BlueAutonTestApp extends LinearOpMode {
 
 
         Action trajectoryActionPushSamples = tab1.fresh()
-                .lineToYConstantHeading(-45)
-                .setTangent(0)
-                .splineToConstantHeading(new Vector2d(35,-30), Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(53,0), Math.toRadians(0))
-                .setTangent(Math.toRadians(90))
-                .lineToYConstantHeading(-60)
-                .lineToY(-10)
-                .setTangent(0)
-                .lineToX(61)
-                .setTangent(Math.toRadians(90))
-                .lineToY(-60)
+                .strafeTo(new Vector2d(-12,25))
+                .strafeTo(new Vector2d(-75,25))
+                .strafeTo(new Vector2d(-75,0))
+                .strafeTo(new Vector2d(-105,0))
+                .strafeTo(new Vector2d(-105,100))
+                .strafeTo(new Vector2d(-105,30))
+                .strafeTo(new Vector2d(-135,30))
+                .strafeTo(new Vector2d(-115,110))
+                .strafeTo(new Vector2d(-115,50))
+                .strafeTo(new Vector2d(-140,50))
+                .strafeTo(new Vector2d(-140,100))
                 .build();
 
+        Action trajectoryActionPushSamplesSpline = tab1.fresh()
+                .splineTo(new Vector2d(-30,-30), Math.toRadians(180))
+                .build();
 
         Action trajectoryRotate180 = tab1.fresh()
                         .turn(180)
@@ -81,9 +84,14 @@ public class BlueAutonTestApp extends LinearOpMode {
                 new SequentialAction(
                         arm.setChamberAction(),
                         wrist.setHighChamberAction(),
+                        slider.sliderHighChamberAction(),
                         tab1.build(),
-                        wait,
-                        slider.sliderHighChamberAction()
+                        slider.sliderInitialPoseAction(),
+                        claw.openClawAction(),
+                        arm.setFoldAction(),
+                        wrist.setStartingFoldAction(),
+                        trajectoryActionPushSamples
+
 //                        arm.setSampleAction(),
 //                        wrist.setSampleAction(),
 //                        claw.openClawAction()

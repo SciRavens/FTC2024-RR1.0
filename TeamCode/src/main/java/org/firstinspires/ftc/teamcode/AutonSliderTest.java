@@ -36,12 +36,19 @@ public class AutonSliderTest extends LinearOpMode {
         claw = new Claw(robot);
 
 
+        TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose);
+
+        Action wait = tab1.fresh()
+                .waitSeconds(5)
+                .build();
+
         waitForStart();
         if (isStopRequested()) return;
 
         Actions.runBlocking(
                 new SequentialAction(
-                        slider.sliderHighChamberAction()
+                        slider.sliderInitialPoseAction(),
+                        wait
 //                        slider.sliderHighBasketAction()
                 )
         );
