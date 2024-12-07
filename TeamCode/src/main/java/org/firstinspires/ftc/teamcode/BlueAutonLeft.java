@@ -14,8 +14,8 @@ import com.acmerobotics.roadrunner.Vector2d;
 
 
 @Config
-@Autonomous(name = "AutonTest", group = "Autonomous")
-public class BlueAutonTestApp extends LinearOpMode {
+@Autonomous(name = "BlueAutonTest", group = "Autonomous")
+public class BlueAutonLeft extends LinearOpMode {
     public Robot robot;
     public DriveTrain DT;
     public Slider slider;
@@ -39,8 +39,10 @@ public class BlueAutonTestApp extends LinearOpMode {
 
 
         TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose)
-//                .setTangent(Math.toRadians(0))
-                .strafeTo(new Vector2d(-12,17.5));
+                .strafeTo(new Vector2d(-12,13));
+
+        TrajectoryActionBuilder tab2 = robot.mDrive.actionBuilder(initialPose)
+                .strafeTo(new Vector2d(-12,5));
 
         //.waitSeconds(3);
 
@@ -50,18 +52,32 @@ public class BlueAutonTestApp extends LinearOpMode {
                 .build();
 
 
-        Action trajectoryActionPushSamples = tab1.fresh()
-                .strafeTo(new Vector2d(-12,25))
-                .strafeTo(new Vector2d(-75,25))
-                .strafeTo(new Vector2d(-75,0))
-                .strafeTo(new Vector2d(-105,0))
-                .strafeTo(new Vector2d(-105,100))
-                .strafeTo(new Vector2d(-105,30))
-                .strafeTo(new Vector2d(-135,30))
-                .strafeTo(new Vector2d(-115,110))
-                .strafeTo(new Vector2d(-115,50))
-                .strafeTo(new Vector2d(-140,50))
-                .strafeTo(new Vector2d(-140,100))
+        Action blueTrajectoryActionPushSamples = tab1.fresh()
+                .strafeTo(new Vector2d(-12,70)) //moves back from specimen hanging
+                .strafeTo(new Vector2d(-85,70)) //strafes to left side
+                .strafeTo(new Vector2d(-85,20)) //1st moves forward
+                .strafeTo(new Vector2d(-115,20)) //1st moves to the side a little bit
+                .strafeTo(new Vector2d(-115,110)) // pushes first sample
+                .strafeTo(new Vector2d(-115,20)) //2nd moves forward
+                .strafeTo(new Vector2d(-145,20)) // 2nd strafes a little bit
+                .strafeTo(new Vector2d(-145,110)) // pushes second sample
+                .strafeTo(new Vector2d(-145,40)) //3rd moves forward
+                .strafeTo(new Vector2d(-180,40)) //3rd strafes a little bit
+                .strafeTo(new Vector2d(-180,120)) //pushes last sample
+                .build();
+
+        Action redTrajectoryActionPushSamples = tab1.fresh()
+                .strafeTo(new Vector2d(-12,70)) //moves back from specimen hanging
+                .strafeTo(new Vector2d(-85,70)) //strafes to left side
+                .strafeTo(new Vector2d(-85,0)) //1st moves forward
+                .strafeTo(new Vector2d(-125,0)) //1st moves to the side a little bit
+                .strafeTo(new Vector2d(-125,100)) // pushes first sample
+                .strafeTo(new Vector2d(-125,0)) //2nd moves forward
+                .strafeTo(new Vector2d(-170,0)) // 2nd strafes a little bit
+                .strafeTo(new Vector2d(-170,100)) // pushes second sample
+                .strafeTo(new Vector2d(-170,0)) //3rd moves forward
+                .strafeTo(new Vector2d(-195,0)) //3rd strafes a little bit
+                .strafeTo(new Vector2d(-195,120)) //pushes last sample
                 .build();
 
         Action trajectoryActionPushSamplesSpline = tab1.fresh()
@@ -90,25 +106,9 @@ public class BlueAutonTestApp extends LinearOpMode {
                         claw.openClawAction(),
                         arm.setFoldAction(),
                         wrist.setStartingFoldAction(),
-                        trajectoryActionPushSamples
+//                        redTrajectoryActionPushSamples
+                        blueTrajectoryActionPushSamples
 
-//                        arm.setSampleAction(),
-//                        wrist.setSampleAction(),
-//                        claw.openClawAction()
-//                        wait,
-//                        claw.openClawAction(),
-//                        wrist.setSpecimenAction(),
-//                        wrist.setStartingFoldAction(),
-//                        wait,
-//                        trajectoryActionPushSamples
-//                        wrist.setSpecimenAction(),
-//                        claw.closeClawAction(),
-//                        arm.setChamberAction(),
-//                        wait,
-//                        build,
-//                        arm.setChamberAction(),
-//                        wait,
-//                        claw.openClawAction()
                 )
         );
         telemetry.update();
