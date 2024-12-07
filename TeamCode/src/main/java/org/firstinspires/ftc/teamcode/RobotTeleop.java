@@ -22,7 +22,7 @@ public class RobotTeleop extends LinearOpMode {
     Leds leds;
 private int cur = 1;
 private double slider_pos;
-public Encoder par0, par1, perp;
+public DcMotorEx par0, par1, perp;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -102,14 +102,13 @@ public Encoder par0, par1, perp;
 
         robot.telemetry.addData("Slider Curr tick:", slider_pos);
 
-        par0 = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "rightFront")));
-        par1 = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "leftRear")));
-        perp = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "rightRear")));
+        par0 = hardwareMap.get(DcMotorEx.class, "rightFront");
+        par1 = hardwareMap.get(DcMotorEx.class, "leftRear");
+        perp = hardwareMap.get(DcMotorEx.class, "rightRear");
 
-        robot.telemetry.addData("rFront ticks", par0.getPositionAndVelocity());
-        robot.telemetry.addData("lFront ticks", par1.getPositionAndVelocity());
-        robot.telemetry.addData("rRear ticks", perp.getPositionAndVelocity());
-
+        robot.telemetry.addData("rFront ticks", par0.getCurrentPosition());
+        robot.telemetry.addData("lFront ticks", par1.getCurrentPosition());
+        robot.telemetry.addData("rRear ticks", perp.getCurrentPosition());
 
     }
 
