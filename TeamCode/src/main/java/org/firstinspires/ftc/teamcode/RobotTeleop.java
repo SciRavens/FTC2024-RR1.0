@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.ftc.Encoder;
+import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
+import com.acmerobotics.roadrunner.ftc.RawEncoder;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @TeleOp(name = "SciRavens-TeleOp")
 public class RobotTeleop extends LinearOpMode {
@@ -17,6 +21,9 @@ public class RobotTeleop extends LinearOpMode {
     RevBlinkinLedDriver.BlinkinPattern pattern;
     Leds leds;
 private int cur = 1;
+private double slider_pos;
+public Encoder par0, par1, perp;
+
     @Override
     public void runOpMode() throws InterruptedException {
         robot = new Robot(hardwareMap, telemetry);
@@ -39,6 +46,7 @@ private int cur = 1;
             wrist.operate();
 //            slider_operate();
             slider_joystick();
+            get_ticks();
             arm_wrist_operate();
             claw_operate();
             leds_operate();
@@ -88,6 +96,22 @@ private int cur = 1;
         }
     }
 
+
+    public void get_ticks() {
+        slider_pos = slider.getCurrentPosition();
+
+        robot.telemetry.addData("Slider Curr tick:", slider_pos);
+
+        par0 = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "rightFront")));
+        par1 = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "leftRear")));
+        perp = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "rightRear")));
+
+        robot.telemetry.addData("rFront ticks", par0.getPositionAndVelocity());
+        robot.telemetry.addData("lFront ticks", par1.getPositionAndVelocity());
+        robot.telemetry.addData("rRear ticks", perp.getPositionAndVelocity());
+
+
+    }
 
 
     public void slider_operate() {
