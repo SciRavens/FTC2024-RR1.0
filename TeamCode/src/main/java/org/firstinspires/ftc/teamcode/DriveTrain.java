@@ -28,21 +28,20 @@ public class DriveTrain {
         robot.mDrive.setDrivePowers( new PoseVelocity2d( new Vector2d(0, 0), 0));
     }
 
-    private void drive(double right_y, double right_x, double left_x, double speed_factor) {
-        double y = -right_y * speed_factor;  // Forward/backward (inverted)
-        double x = -right_x * speed_factor;  // Strafe (adjusted for mecanum drift)
-        double rx = -left_x * speed_factor;  // Rotation
+    private void drive(double left_y, double left_x, double right_x, double speed_factor) {
+        double y = -left_y * speed_factor;  // Forward/backward (inverted)
+        double x = left_x * speed_factor;  // Strafe (adjusted for mecanum drift)
+        double rx = right_x * speed_factor;  // Rotation
 
         // Set the drive power using the MecanumDrive class
         robot.mDrive.setDrivePowers( new PoseVelocity2d( new Vector2d(y, x), rx) );
     }
 
     public void drive_normal() {
-        drive(gamepad.right_stick_y, gamepad.right_stick_x, gamepad.left_stick_x, normal_speed);
-    }
+        drive(gamepad.left_stick_y, gamepad.left_stick_x, gamepad.right_stick_x, normal_speed);    }
 
     public void drive_medium() {
-        drive(gamepad.right_stick_y, gamepad.right_stick_x, gamepad.left_stick_x, medium_speed);
+        drive(gamepad.left_stick_y, gamepad.left_stick_x, gamepad.right_stick_x, medium_speed);
     }
 
     public void drive_slow() {
@@ -62,7 +61,7 @@ public class DriveTrain {
         drive(y, x, 0.0, normal_speed);
     }
     public void drive() {
-        if (gamepad.right_stick_x != 0 || gamepad.right_stick_y != 0 || gamepad.left_stick_x != 0) {
+        if (gamepad.left_stick_x != 0 || gamepad.left_stick_y != 0 || gamepad.right_stick_x != 0) {
             if (gamepad.left_trigger > 0 || gamepad.right_trigger > 0) {
                 drive_medium();
             } else {
