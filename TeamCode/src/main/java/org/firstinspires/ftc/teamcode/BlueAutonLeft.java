@@ -39,7 +39,7 @@ public class BlueAutonLeft extends LinearOpMode {
 
 
         TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose)
-                .strafeTo(new Vector2d(-12,13));
+                .strafeTo(new Vector2d(-12,5));
 
         TrajectoryActionBuilder tab2 = robot.mDrive.actionBuilder(initialPose)
                 .strafeTo(new Vector2d(-12,5));
@@ -63,7 +63,7 @@ public class BlueAutonLeft extends LinearOpMode {
                 .strafeTo(new Vector2d(-145,110)) // pushes second sample
                 .strafeTo(new Vector2d(-145,40)) //3rd moves forward
                 .strafeTo(new Vector2d(-180,40)) //3rd strafes a little bit
-                .strafeTo(new Vector2d(-180,120)) //pushes last sample
+                .strafeTo(new Vector2d(-180,130)) //pushes last sample
                 .build();
 
         Action redTrajectoryActionPushSamples = tab1.fresh()

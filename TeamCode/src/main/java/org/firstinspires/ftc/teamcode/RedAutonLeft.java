@@ -14,7 +14,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 
 
 @Config
-@Autonomous(name = "AutonTest", group = "Autonomous")
+@Autonomous(name = "RedAutonTest", group = "Autonomous")
 public class RedAutonLeft extends LinearOpMode {
     public Robot robot;
     public DriveTrain DT;
@@ -39,7 +39,7 @@ public class RedAutonLeft extends LinearOpMode {
 
 
         TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose)
-                .strafeTo(new Vector2d(-12,5));
+                .strafeTo(new Vector2d(-12,4));
 
         //.waitSeconds(3);
 
@@ -52,15 +52,15 @@ public class RedAutonLeft extends LinearOpMode {
         Action redTrajectoryActionPushSamples = tab1.fresh()
                 .strafeTo(new Vector2d(-12,70)) //moves back from specimen hanging
                 .strafeTo(new Vector2d(-85,70)) //strafes to left side
-                .strafeTo(new Vector2d(-85,0)) //1st moves forward
-                .strafeTo(new Vector2d(-125,0)) //1st moves to the side a little bit
-                .strafeTo(new Vector2d(-125,100)) // pushes first sample
-                .strafeTo(new Vector2d(-125,0)) //2nd moves forward
-                .strafeTo(new Vector2d(-170,0)) // 2nd strafes a little bit
-                .strafeTo(new Vector2d(-170,100)) // pushes second sample
-                .strafeTo(new Vector2d(-170,0)) //3rd moves forward
-                .strafeTo(new Vector2d(-195,0)) //3rd strafes a little bit
-                .strafeTo(new Vector2d(-195,120)) //pushes last sample
+                .strafeTo(new Vector2d(-85,20)) //1st moves forward
+                .strafeTo(new Vector2d(-115,20)) //1st moves to the side a little bit
+                .strafeTo(new Vector2d(-115,110)) // pushes first sample
+                .strafeTo(new Vector2d(-115,20)) //2nd moves forward
+                .strafeTo(new Vector2d(-145,20)) // 2nd strafes a little bit
+                .strafeTo(new Vector2d(-145,125)) // pushes second sample
+                .strafeTo(new Vector2d(-145,60)) //3rd moves forward
+                .strafeTo(new Vector2d(-190,40)) //3rd strafes a little bit
+                .strafeTo(new Vector2d(-190,130)) //pushes last sample
                 .build();
 
         Action trajectoryActionPushSamplesSpline = tab1.fresh()
