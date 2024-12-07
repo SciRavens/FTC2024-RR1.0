@@ -28,7 +28,7 @@ public class AutonSliderTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // TBD: set the initial position
-        Pose2d initialPose = new Pose2d(11.8, 61.7, Math.toRadians(90));
+        Pose2d initialPose = new Pose2d(0, 0, Math.toRadians(90));
         robot = new Robot(hardwareMap, telemetry);
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot);
@@ -36,7 +36,10 @@ public class AutonSliderTest extends LinearOpMode {
         claw = new Claw(robot);
 
 
-        TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose);
+        TrajectoryActionBuilder tab1 = robot.mDrive.actionBuilder(initialPose)
+                .setTangent(90)
+                .lineToY(20)
+                .waitSeconds(5);
 
         Action wait = tab1.fresh()
                 .waitSeconds(5)
@@ -47,8 +50,7 @@ public class AutonSliderTest extends LinearOpMode {
 
         Actions.runBlocking(
                 new SequentialAction(
-                        slider.sliderInitialPoseAction(),
-                        wait
+                        tab1.build()
 //                        slider.sliderHighBasketAction()
                 )
         );
