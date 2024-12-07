@@ -30,7 +30,7 @@ public class DriveTrain {
 
     private void drive(double left_y, double left_x, double right_x, double speed_factor) {
         double y = -left_y * speed_factor;  // Forward/backward (inverted)
-        double x = left_x * speed_factor;  // Strafe (adjusted for mecanum drift)
+        double x = -left_x * speed_factor;  // Strafe (adjusted for mecanum drift)
         double rx = right_x * speed_factor;  // Rotation
 
         // Set the drive power using the MecanumDrive class

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class Wrist {
     private Robot robot;
     public double target;
-    private double speed = 0.005;
+    private double speed = 0.001;
 
     public boolean speed_control = false;
 
