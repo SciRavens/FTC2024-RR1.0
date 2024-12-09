@@ -34,23 +34,23 @@ public DcMotorEx par0, par1, perp;
         claw = new Claw(robot);
         clawAngle = new ClawAngle(robot);
 
-        leds = new Leds(robot);
-        leds.setPattern(0);
+//        leds = new Leds(robot);
+//        leds.setPattern(0);
         arm.setPosStarting(false);
         wrist.setPosStarting(false);
         waitForStart();
-        leds.setPattern(cur);
+//        leds.setPattern(cur);
         while(opModeIsActive()) {
             DT.drive();
             arm.operate();
             wrist.operate();
 //            slider_operate();
             slider_joystick();
-            get_ticks();
+            //get_ticks();
             arm_wrist_operate();
             claw_operate();
-            leds_operate();
-            robot.telemetry.update();
+            //leds_operate();
+            //robot.telemetry.update();
         }
     }
 
@@ -106,9 +106,9 @@ public DcMotorEx par0, par1, perp;
         par1 = hardwareMap.get(DcMotorEx.class, "leftRear");
         perp = hardwareMap.get(DcMotorEx.class, "rightRear");
 
-        robot.telemetry.addData("rFront ticks", par0.getCurrentPosition());
-        robot.telemetry.addData("lFront ticks", par1.getCurrentPosition());
-        robot.telemetry.addData("rRear ticks", perp.getCurrentPosition());
+        robot.telemetry.addData("rightFront ticks", par0.getCurrentPosition());
+        robot.telemetry.addData("leftFront ticks", par1.getCurrentPosition());
+        robot.telemetry.addData("rightRear ticks", perp.getCurrentPosition());
 
     }
 
